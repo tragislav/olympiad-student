@@ -61,7 +61,12 @@ function Login() {
           <Link className="LoginFooterFormLink" to="/registration">
             Регистрация
           </Link>
-          <Link className="LoginFooterFormLink underline">Забыли пароль?</Link>
+          <Link
+            className="LoginFooterFormLink underline"
+            to="/passwordRecovery"
+          >
+            Забыли пароль?
+          </Link>
         </div>
       </div>
     </div>
