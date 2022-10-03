@@ -1,10 +1,10 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import schema from "./validation";
 import "./styled.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 function Login() {
   const [disable, setDisable] = useState(false);
@@ -30,21 +30,21 @@ function Login() {
 
   return (
     <div className="LoginContainer">
-      <div className="FormWrapper">
-        <h3 className="FormTitle">Вход в личный кабинет</h3>
+      <div className="LoginFormWrapper">
+        <h3 className="LoginFormTitle">Вход в личный кабинет</h3>
         <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
           <input
-            className="FormInput"
+            className="LoginFormInput"
             ref={username.ref}
             name={username.name}
             onBlur={username.onBlur}
             onChange={username.onChange}
-            type="email"
+            type="text"
             placeholder="Ваш Логин"
             required
           />
           <input
-            className="FormInput"
+            className="LoginFormInput"
             ref={password.ref}
             name={password.name}
             onBlur={password.onBlur}
@@ -57,9 +57,11 @@ function Login() {
             Войти
           </button>
         </form>
-        <div className="FooterForm">
-          <Link className="FooterFormLink">Регистрация</Link>
-          <Link className="FooterFormLink underline">Забыли пароль?</Link>
+        <div className="LoginFooterForm">
+          <Link className="LoginFooterFormLink" to="/registration">
+            Регистрация
+          </Link>
+          <Link className="LoginFooterFormLink underline">Забыли пароль?</Link>
         </div>
       </div>
     </div>
