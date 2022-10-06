@@ -1,0 +1,99 @@
+.RecoveryContainer {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9a9c9c;
+  width: 100%;
+}
+
+.RecoveryFormWrapper {
+  width: 465px;
+  text-align: center;
+  margin: 0 auto;
+  border: 2px solid #ebebeb;
+  box-sizing: border-box;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border-radius: 10px;
+  position: relative;
+}
+
+.RecoveryFormTitle {
+  font-family: "Montserrat";
+  padding-top: 50px;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 120%;
+  color: #434c63;
+}
+
+.RecoveryText {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #505050;
+  padding: 10px 50px 0;
+}
+
+.bold {
+  font-weight: 500;
+  font-size: 18px;
+  color: #494a4a;
+  padding-top: 30px;
+}
+
+.RecoveryForm {
+  text-align: left;
+  padding: 35px 50px;
+}
+
+.RecoveryFormInput {
+  width: 100%;
+  height: 55px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 2px solid #ebebeb;
+  box-sizing: border-box;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border-radius: 7px;
+}
+
+.RecoveryFormInput::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.RecoveryFormSubmit {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  background: #434c63;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border: transparent;
+  border-radius: 7px;
+  width: 100%;
+  height: 52px;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.RecoveryFooterForm {
+  padding: 0 50px 40px;
+}
+
+.RecoveryFooterFormLink {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #434c63;
+}
