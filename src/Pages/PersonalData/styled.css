@@ -1,0 +1,29 @@
+.container {
+  max-width: 1702px;
+  margin: 0 auto;
+}
+
+.MainWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.FormWrapper {
+  width: 1267px;
+}
+
+.SecondaryContent {
+  width: 395px;
+}
+
+.FormInner {
+  font-family: "Roboto";
+  font-style: normal;
+  border: 2px solid #f5f5f5;
+  border-radius: 15px;
+  background: #ffffff;
+  margin: 40px 0;
+}
+
+.FioTitle {
+}
