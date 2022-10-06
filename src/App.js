@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import PasswordRecovery from "./Pages/PasswordRecovery";
 import PersonalData from "./Pages/PersonalData";
 import Registration from "./Pages/Registration";
+import LegalRepresentative from "./Pages/LegalRepresentative";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="registration" element={<Registration />} />
         <Route path="passwordRecovery" element={<PasswordRecovery />} />
         <Route path="main" element={<PersonalData />} />
+        <Route path="parents" element={<LegalRepresentative />} />
       </Route>
     </Routes>
   );
