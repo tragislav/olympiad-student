@@ -43,31 +43,37 @@ function LegalRepresentative() {
                 <div>
                   <h3>Выбрать:</h3>
                   <div>
-                    <input
-                      // {...register("representativeType")}
-                      type="checkbox"
-                      name="mother"
-                      required
-                    />
-                    <label htmlFor="mother">Мать</label>
+                    <label htmlFor="mother">
+                      <input
+                        {...register("representativeType", { required: true })}
+                        type="radio"
+                        id="mother"
+                        value="mother"
+                      />
+                      Мать
+                    </label>
                   </div>
                   <div>
-                    <input
-                      // {...register("representativeType")}
-                      type="checkbox"
-                      name="father"
-                      required
-                    />
-                    <label htmlFor="father">Отец</label>
+                    <label htmlFor="father">
+                      <input
+                        {...register("representativeType", { required: true })}
+                        type="radio"
+                        id="father"
+                        value="father"
+                      />
+                      Отец
+                    </label>
                   </div>
                   <div>
-                    <input
-                      // {...register("representativeType")}
-                      type="checkbox"
-                      name="guardian"
-                      required
-                    />
-                    <label htmlFor="guardian">Опекун</label>
+                    <label htmlFor="guardian">
+                      <input
+                        {...register("representativeType", { required: true })}
+                        type="radio"
+                        id="guardian"
+                        value="guardian"
+                      />
+                      Опекун
+                    </label>
                   </div>
                 </div>
                 <div>
