@@ -30,7 +30,7 @@ function PersonalData() {
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());
-    navigate("/parents");
+    navigate("/representative");
   };
 
   return (

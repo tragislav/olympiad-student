@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./Pages/Login";
 import PasswordRecovery from "./Pages/PasswordRecovery";
-import PersonalData from "./Pages/PersonalData";
 import Registration from "./Pages/Registration";
+import PersonalData from "./Pages/PersonalData";
 import LegalRepresentative from "./Pages/LegalRepresentative";
+import ChooseSpecialty from "./Pages/ChooseSpecialty";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="registration" element={<Registration />} />
         <Route path="passwordRecovery" element={<PasswordRecovery />} />
         <Route path="main" element={<PersonalData />} />
-        <Route path="parents" element={<LegalRepresentative />} />
+        <Route path="representative" element={<LegalRepresentative />} />
+        <Route path="specialty" element={<ChooseSpecialty />} />
       </Route>
     </Routes>
   );

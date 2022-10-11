@@ -26,7 +26,7 @@ function LegalRepresentative() {
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());
-    navigate("/parents");
+    navigate("/specialty");
   };
 
   useEffect(() => {
