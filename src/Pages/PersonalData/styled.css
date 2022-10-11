@@ -1,29 +1,138 @@
-.container {
-  max-width: 1702px;
-  margin: 0 auto;
+.MainWrapper {
+  font-family: "Roboto";
+  font-style: normal;
+  width: 89.2%;
+  padding: 0 5.4%;
+  margin-top: 60px;
 }
 
-.MainWrapper {
+.MainWrapperForm {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  /* justify-content: space-evenly; */
+  width: 100%;
+}
+
+.EmptyDiv {
+  width: 23%;
+  max-width: 395px;
+  margin-right: 2.25%;
 }
 
 .FormWrapper {
-  width: 1267px;
-}
-
-.SecondaryContent {
-  width: 395px;
+  width: 51%;
+  max-width: 832px;
 }
 
 .FormInner {
-  font-family: "Roboto";
-  font-style: normal;
   border: 2px solid #f5f5f5;
   border-radius: 15px;
+  padding: 30px 30px 0 30px;
   background: #ffffff;
-  margin: 40px 0;
+  margin: 40px 0 0 auto;
+  max-width: 768px;
 }
 
-.FioTitle {
+.FormInnerTitle {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #494a4a;
+  margin-bottom: 20px;
+}
+
+.FormInnerText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #505050;
+  margin-bottom: 25px;
+}
+
+.FormInnerContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-top: 2px solid #f5f5f5;
+  padding-top: 30px;
+}
+
+.InputWrapper {
+  margin-bottom: 40px;
+}
+
+.InputTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
+  margin-bottom: 13px;
+  padding-left: 20px;
+}
+
+.InputContent {
+  background: #ffffff;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+  height: 55px;
+  padding-left: 20px;
+}
+
+.InputContent::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9a9a9a;
+}
+
+.InputContent::-webkit-datetime-edit-text,
+.InputContent::-webkit-datetime-edit-month-field,
+.InputContent::-webkit-datetime-edit-day-field,
+.InputContent::-webkit-datetime-edit-year-field {
+  /* font-weight: 400; */
+  /* font-size: 25px; */
+  /* line-height: 19px; */
+  color: #9a9a9a;
+}
+
+.InputContent::-webkit-calendar-picker-indicator {
+  padding-right: 20px;
+}
+
+.mr30 {
+  margin-right: 30px;
+}
+
+.mr25 {
+  margin-right: 25px;
+}
+
+.w172 {
+  width: 146px;
+}
+
+.w266 {
+  width: 240px;
+}
+
+.w274 {
+  width: 244px;
+}
+
+.w468 {
+  width: 442px;
+}
+
+.w73 {
+  width: 47px;
+}
+
+.w772 {
+  width: 746px;
+}
+
+.DisabledInput {
+  background: #ededed;
 }
