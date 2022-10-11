@@ -6,7 +6,7 @@ import "./styled.css";
 import { Link } from "react-router-dom";
 
 function Registration() {
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 

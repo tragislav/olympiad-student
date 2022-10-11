@@ -18,7 +18,7 @@ function PersonalData() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     // resolver: yupResolver(schema),
   });
 

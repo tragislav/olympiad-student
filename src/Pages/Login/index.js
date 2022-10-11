@@ -8,7 +8,7 @@ import "./styled.css";
 
 function Login() {
   const [disable, setDisable] = useState(false);
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 
