@@ -6,7 +6,7 @@ import schema from "./validation";
 import "./styled.css";
 
 function PasswordRecovery() {
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 

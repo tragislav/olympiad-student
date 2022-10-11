@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,11 +12,15 @@ function PersonalData() {
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const [dataProcessing, setDataProcessing] = useState(false);
   const [disable, setDisable] = useState(true);
+
+  const userInfo = useSelector((state) => state.main.info);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset } = useForm({
+
+  const { register, handleSubmit } = useForm({
     // resolver: yupResolver(schema),
   });
-  const userInfo = useSelector((state) => state.main.info);
 
   useEffect(() => {
     privacyPolicy && dataProcessing ? setDisable(false) : setDisable(true);
@@ -26,6 +30,7 @@ function PersonalData() {
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());
+    navigate("/parents");
   };
 
   return (
