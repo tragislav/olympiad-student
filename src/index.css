@@ -187,3 +187,8 @@ input::placeholder {
   line-height: 19px;
   color: #9a9a9a;
 }
+
+input:disabled {
+  background: #ededed;
+  -webkit-box-shadow: none;
+}

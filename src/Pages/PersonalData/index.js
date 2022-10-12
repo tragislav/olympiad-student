@@ -101,7 +101,7 @@ function PersonalData() {
                 <p className="InputTitle">Эл.почта</p>
                 <input
                   {...register("email")}
-                  className="InputContent DisabledInput w274"
+                  className="InputContent w274"
                   defaultValue={"s.dykomenko@gmail.com"}
                   type="email"
                   disabled
