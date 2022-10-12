@@ -174,6 +174,9 @@ input {
   line-height: 19px;
   color: #505050;
   background: #ffffff;
+  transition: 0.2s all linear;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
 }
 
 input::placeholder {
