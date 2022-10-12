@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./styled.css";
 
-function ProcessingData({ notFirst, btnText }) {
+function ProcessingData({ notFirst, btnText, backTo }) {
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const [dataProcessing, setDataProcessing] = useState(false);
   const [disable, setDisable] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     privacyPolicy && dataProcessing ? setDisable(false) : setDisable(true);
@@ -23,7 +26,7 @@ function ProcessingData({ notFirst, btnText }) {
           <div className="ProcessingLabel">
             <label htmlFor="privacyPolicy">
               <input
-                style={{ marginRight: "15px" }}
+                className="RadioItem"
                 type="checkbox"
                 name="privacyPolicy"
                 onChange={() => setPrivacyPolicy(!privacyPolicy)}
@@ -34,7 +37,7 @@ function ProcessingData({ notFirst, btnText }) {
           <div className="ProcessingLabel">
             <label htmlFor="dataProcessing">
               <input
-                style={{ marginRight: "15px" }}
+                className="RadioItem"
                 type="checkbox"
                 name="dataProcessing"
                 onChange={() => setDataProcessing(!dataProcessing)}
@@ -44,15 +47,18 @@ function ProcessingData({ notFirst, btnText }) {
             </label>
           </div>
           {notFirst ? (
-            <>
+            <div className="ButtonsContainer">
+              <button className="backBtn" onClick={() => navigate(backTo)}>
+                Назад
+              </button>
               <button
-                className="ProcessingSubmit"
+                className="ProcessingSubmit anotherBtnState"
                 type="submit"
                 disabled={disable}
               >
-                ffff
+                {btnText}
               </button>
-            </>
+            </div>
           ) : (
             <>
               <button
