@@ -7,6 +7,7 @@ import Registration from "./Pages/Registration";
 import PersonalData from "./Pages/PersonalData";
 import LegalRepresentative from "./Pages/LegalRepresentative";
 import ChooseSpecialty from "./Pages/ChooseSpecialty";
+import RequireAuth from "./components/HOCs/RequireAuth";
 
 function App() {
   return (
@@ -15,9 +16,30 @@ function App() {
         <Route index element={<Login />} />
         <Route path="registration" element={<Registration />} />
         <Route path="passwordRecovery" element={<PasswordRecovery />} />
-        <Route path="main" element={<PersonalData />} />
-        <Route path="representative" element={<LegalRepresentative />} />
-        <Route path="specialty" element={<ChooseSpecialty />} />
+        <Route
+          path="main"
+          element={
+            <RequireAuth>
+              <PersonalData />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="representative"
+          element={
+            <RequireAuth>
+              <LegalRepresentative />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="specialty"
+          element={
+            <RequireAuth>
+              <ChooseSpecialty />
+            </RequireAuth>
+          }
+        />
       </Route>
     </Routes>
   );

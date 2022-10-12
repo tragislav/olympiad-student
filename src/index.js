@@ -9,12 +9,15 @@ import App from "./App";
 
 import "./index.css";
 import "./width.css";
+import AuthProvider from "./components/HOCs/AuthProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
