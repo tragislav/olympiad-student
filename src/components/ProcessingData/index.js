@@ -39,6 +39,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 className="RadioItem"
                 type="checkbox"
                 name="privacyPolicy"
+                checked={privacyPolicy}
                 onChange={() => dispatch(setPrivacyPolicy(!privacyPolicy))}
               />
               Политика конфиденциальности
@@ -49,6 +50,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
               <input
                 className="RadioItem"
                 type="checkbox"
+                checked={dataProcessing}
                 name="dataProcessing"
                 onChange={() => dispatch(setDataProcessing(!dataProcessing))}
               />

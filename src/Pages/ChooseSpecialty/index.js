@@ -8,6 +8,7 @@ import { addToStore, addToState } from "../../store/main/reducer";
 import ProcessingData from "../../components/ProcessingData";
 
 import "./styled.css";
+import { postEnrolliesData } from "../../api/enrollee";
 
 function ChooseSpecialty() {
   const userInfo = useSelector((state) => state.main.info);
@@ -22,6 +23,13 @@ function ChooseSpecialty() {
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());
+    postEnrolliesData(
+      sessionStorage.getItem("username"),
+      sessionStorage.getItem("password"),
+      userInfo
+    )
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
   };
 
   return (
