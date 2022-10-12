@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import {
+  setPrivacyPolicy,
+  setDataProcessing,
+} from "../../store/processing/reducer";
 
 import "./styled.css";
 
 function ProcessingData({ notFirst, btnText, backTo }) {
-  const [privacyPolicy, setPrivacyPolicy] = useState(false);
-  const [dataProcessing, setDataProcessing] = useState(false);
   const [disable, setDisable] = useState(true);
 
+  const dataProcessing = useSelector(
+    (state) => state.processing.dataProcessing
+  );
+  const privacyPolicy = useSelector((state) => state.processing.privacyPolicy);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +39,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 className="RadioItem"
                 type="checkbox"
                 name="privacyPolicy"
-                onChange={() => setPrivacyPolicy(!privacyPolicy)}
+                onChange={() => dispatch(setPrivacyPolicy(!privacyPolicy))}
               />
               Политика конфиденциальности
             </label>
@@ -40,7 +50,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 className="RadioItem"
                 type="checkbox"
                 name="dataProcessing"
-                onChange={() => setDataProcessing(!dataProcessing)}
+                onChange={() => dispatch(setDataProcessing(!dataProcessing))}
               />
               Обработка данных в соответствии с законом о персональных данных от
               7 мая 2021 г. № 99-3.

@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import schema from "./validation";
 import "./styled.css";
+import { getByUsername } from "../../api/auth";
 
 function Login() {
   const [disable, setDisable] = useState(false);
@@ -20,9 +21,12 @@ function Login() {
     return formData;
   };
 
-  const onSubmit = (inputs) => {
+  const onSubmit = ({ username, password }) => {
     setDisable(true);
-    console.log(inputs);
+    console.log(username, password);
+    getByUsername(username, password)
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
   };
 
   const username = register("username");
@@ -53,7 +57,7 @@ function Login() {
             placeholder="Ваш Пароль"
             required
           />
-          <button className="LoginFormSubmit" type="submit">
+          <button className="LoginFormSubmit" type="submit" disabled={disable}>
             Войти
           </button>
         </form>
