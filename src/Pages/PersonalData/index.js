@@ -208,7 +208,7 @@ function PersonalData() {
                 <p className="InputTitle">Вид документа</p>
                 <input
                   {...register("documentType")}
-                  className="InputContent mr30"
+                  className="InputContent mr25 w172"
                   placeholder="Выбрать"
                   defaultValue={
                     userInfo.documentType ? userInfo.documentType : null
@@ -221,7 +221,7 @@ function PersonalData() {
                 <p className="InputTitle">Серия</p>
                 <input
                   {...register("documentSeries")}
-                  className="InputContent mr30"
+                  className="InputContent mr25 w91"
                   defaultValue={
                     userInfo.documentSeries ? userInfo.documentSeries : null
                   }
@@ -233,7 +233,7 @@ function PersonalData() {
                 <p className="InputTitle">Номер</p>
                 <input
                   {...register("documentNumber")}
-                  className="InputContent mr30"
+                  className="InputContent mr25 w155"
                   defaultValue={
                     userInfo.documentNumber ? userInfo.documentNumber : null
                   }
@@ -245,7 +245,7 @@ function PersonalData() {
                 <p className="InputTitle">Индентификационный номер</p>
                 <input
                   {...register("identificationNumber")}
-                  className="InputContent mr30"
+                  className="InputContent w274"
                   defaultValue={
                     userInfo.identificationNumber
                       ? userInfo.identificationNumber

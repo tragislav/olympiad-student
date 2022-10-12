@@ -71,6 +71,12 @@
 }
 
 .InputContent {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #505050;
   background: #ffffff;
   border: 2px solid #ebebeb;
   border-radius: 7px;
@@ -131,6 +137,14 @@
 
 .w772 {
   width: 746px;
+}
+
+.w91 {
+  width: 65px;
+}
+
+.w155 {
+  width: 129px;
 }
 
 .DisabledInput {
