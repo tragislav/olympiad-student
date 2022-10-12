@@ -61,14 +61,6 @@
   border-radius: 7px;
 }
 
-.RecoveryFormInput::placeholder {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-}
-
 .RecoveryFormSubmit {
   font-family: "Roboto";
   font-style: normal;
