@@ -3,11 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { getByUsername } from "../../api/auth";
+import { authByUsername } from "../../api/auth";
 
 import { useAuth } from "../../hooks/useAuth";
 
 import schema from "./validation";
+
+import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
 
 import "./styled.css";
 
@@ -36,7 +38,7 @@ function Login() {
 
   const onSubmit = ({ username, password }) => {
     setDisable(true);
-    getByUsername(username, password)
+    authByUsername(username, password)
       .then((data) => {
         sessionStorage.setItem("username", username);
         sessionStorage.setItem("password", password);

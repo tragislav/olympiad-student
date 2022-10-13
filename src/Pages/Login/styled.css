@@ -32,18 +32,26 @@
   padding: 35px 50px;
 }
 
-.LoginFormError {
-  color: red;
-  padding-top: 10px;
-  position: absolute;
-  text-align: center;
+.ErrorWrapper {
+  display: flex;
   width: 100%;
+  margin-bottom: 5px;
+  opacity: 0;
+  transition: 0.2s all linear;
+}
+
+.LoginFormError {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ff8484;
+  padding-left: 10px;
 }
 
 .LoginFormInput {
   width: 100%;
   height: 55px;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
   padding-left: 20px;
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgb(201 201 201 10%);
