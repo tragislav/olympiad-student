@@ -7,9 +7,15 @@ import { addToStore, addToState } from "../../store/main/reducer";
 
 import "./styled.css";
 import ProcessingData from "../../components/ProcessingData";
+import { useEffect, useState } from "react";
 
 function LegalRepresentative() {
-  const userInfo = useSelector((state) => state.main.info);
+  const [agreed, setAgreed] = useState(false);
+
+  const passport = useSelector(
+    (state) => state.main.legalRepresentative.passport
+  );
+  const person = useSelector((state) => state.main.legalRepresentative.person);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +24,12 @@ function LegalRepresentative() {
     // resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    person.agreed ? setAgreed(person.agreed) : setAgreed(false);
+  }, [person.agreed]);
+
   const onSubmit = (inputs) => {
+    inputs.legalRepresentative.person.agreed = agreed;
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());
@@ -35,31 +46,52 @@ function LegalRepresentative() {
               <h3 className="FormInnerTitle">Выбрать:</h3>
               <div className="RepresentativeTypeItem">
                 <input
-                  {...register("representativeType", { required: true })}
+                  {...register(
+                    "legalRepresentative.person.representativeType",
+                    { required: true }
+                  )}
+                  defaultChecked={
+                    person.representativeType === "mother" ? true : false
+                  }
                   className="RadioItem"
                   type="radio"
                   id="mother"
                   value="mother"
+                  required
                 />
                 <label htmlFor="mother">Мать</label>
               </div>
               <div className="RepresentativeTypeItem">
                 <input
-                  {...register("representativeType", { required: true })}
+                  {...register(
+                    "legalRepresentative.person.representativeType",
+                    { required: true }
+                  )}
+                  defaultChecked={
+                    person.representativeType === "father" ? true : false
+                  }
                   className="RadioItem"
                   type="radio"
                   id="father"
                   value="father"
+                  required
                 />
                 <label htmlFor="father">Отец</label>
               </div>
               <div className="RepresentativeTypeItem">
                 <input
-                  {...register("representativeType", { required: true })}
+                  {...register(
+                    "legalRepresentative.person.representativeType",
+                    { required: true }
+                  )}
+                  default={
+                    person.representativeType === "guardian" ? true : false
+                  }
                   className="RadioItem"
                   type="radio"
                   id="guardian"
                   value="guardian"
+                  required
                 />
                 <label htmlFor="guardian">Опекун</label>
               </div>
@@ -68,58 +100,44 @@ function LegalRepresentative() {
               <div className="InputWrapper">
                 <p className="InputTitle">Имя</p>
                 <input
-                  {...register("representativeName")}
+                  {...register("legalRepresentative.person.name")}
                   className="InputContent mr30 w172"
                   type="text"
                   placeholder="Введите имя"
-                  defaultValue={
-                    userInfo.representativeName
-                      ? userInfo.representativeName
-                      : null
-                  }
+                  defaultValue={person.name ? person.name : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>
                 <input
-                  {...register("representativeSurname")}
+                  {...register("legalRepresentative.person.surname")}
                   className="InputContent mr30 w266"
                   type="text"
                   placeholder="Введите фамилию"
-                  defaultValue={
-                    userInfo.representativeSurname
-                      ? userInfo.representativeSurname
-                      : null
-                  }
+                  defaultValue={person.surname ? person.surname : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Отчество</p>
                 <input
-                  {...register("representativePatronymic")}
+                  {...register("legalRepresentative.person.patronymic")}
                   className="InputContent w274"
                   type="text"
                   placeholder="Введите отчество"
-                  defaultValue={
-                    userInfo.representativePatronymic
-                      ? userInfo.representativePatronymic
-                      : null
-                  }
+                  defaultValue={person.patronymic ? person.patronymic : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Вид документа</p>
                 <input
-                  {...register("representativeDocumentType")}
+                  {...register("legalRepresentative.passport.documentType")}
                   className="InputContent mr30 w172"
                   placeholder="Выбрать"
                   defaultValue={
-                    userInfo.representativeDocumentType
-                      ? userInfo.representativeDocumentType
-                      : null
+                    passport.documentType ? passport.documentType : null
                   }
                   type="text"
                   required
@@ -128,13 +146,9 @@ function LegalRepresentative() {
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
                 <input
-                  {...register("representativeDocumentSeries")}
+                  {...register("legalRepresentative.passport.series")}
                   className="InputContent mr30 w91"
-                  defaultValue={
-                    userInfo.representativeDocumentSeries
-                      ? userInfo.representativeDocumentSeries
-                      : null
-                  }
+                  defaultValue={passport.series ? passport.series : null}
                   type="text"
                   required
                 />
@@ -142,24 +156,22 @@ function LegalRepresentative() {
               <div className="InputWrapper">
                 <p className="InputTitle">Номер</p>
                 <input
-                  {...register("representativeDocumentNumber")}
+                  {...register("legalRepresentative.passport.number")}
                   className="InputContent mr30 w145"
-                  defaultValue={
-                    userInfo.representativeDocumentNumber
-                      ? userInfo.representativeDocumentNumber
-                      : null
-                  }
+                  defaultValue={passport.number ? passport.number : null}
                   type="text"
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Индентификационный номер</p>
                 <input
-                  {...register("representativeIdentificationNumber")}
+                  {...register(
+                    "legalRepresentative.passport.identificationNumber"
+                  )}
                   className="InputContent w274"
                   defaultValue={
-                    userInfo.representativeIdentificationNumber
-                      ? userInfo.representativeIdentificationNumber
+                    passport.identificationNumber
+                      ? passport.identificationNumber
                       : null
                   }
                   type="text"
@@ -168,13 +180,9 @@ function LegalRepresentative() {
               <div className="InputWrapper">
                 <p className="InputTitle">Телефон</p>
                 <input
-                  {...register("representativePhone")}
+                  {...register("legalRepresentative.person.phoneNumber")}
                   className="InputContent w266"
-                  defaultValue={
-                    userInfo.representativePhone
-                      ? userInfo.representativePhone
-                      : null
-                  }
+                  defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
                 />
               </div>
@@ -182,11 +190,13 @@ function LegalRepresentative() {
             <div className="RepresentativeAgree">
               <label htmlFor="representativeAgree" className="ProcessingText">
                 <input
-                  style={{ marginRight: "15px" }}
-                  {...register("representativeAgree")}
                   className="RadioItem"
                   type="checkbox"
                   name="representativeAgree"
+                  value="a"
+                  defaultChecked={person.agreed ? true : false}
+                  onChange={() => setAgreed(!agreed)}
+                  required
                 />
                 Я потверждаю, что являюсь законным представителем
                 несовершеннолетнего участника олимпиады и даю согласие на

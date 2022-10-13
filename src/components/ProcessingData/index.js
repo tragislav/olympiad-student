@@ -7,6 +7,8 @@ import {
   setDataProcessing,
 } from "../../store/processing/reducer";
 
+import { addToStore } from "../../store/main/reducer";
+
 import "./styled.css";
 
 function ProcessingData({ notFirst, btnText, backTo }) {
@@ -21,7 +23,11 @@ function ProcessingData({ notFirst, btnText, backTo }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    privacyPolicy && dataProcessing ? setDisable(false) : setDisable(true);
+    if (privacyPolicy && dataProcessing) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
   }, [dataProcessing, privacyPolicy]);
 
   return (
