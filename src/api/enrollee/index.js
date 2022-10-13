@@ -8,3 +8,12 @@ export function postEnrolliesData(username, password, enrolliesData) {
     },
   });
 }
+
+export function getEnrolleeByUsername(username, password) {
+  return api.get(`/api/enrollies/username?username=${username}`, {
+    auth: {
+      username: username,
+      password: password,
+    },
+  });
+}

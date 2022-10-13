@@ -1,7 +1,7 @@
 import { api } from "..";
 
 export function authByUsername(username, password) {
-  return api.get(`/api/users?username=${username}`, {
+  return api.get(`/api/users/username?username=${username}`, {
     auth: {
       username: username,
       password: password,
