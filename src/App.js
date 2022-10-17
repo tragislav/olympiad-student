@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Layout from "./components/Layout";
 import Login from "./Pages/Login";
@@ -9,7 +11,52 @@ import LegalRepresentative from "./Pages/LegalRepresentative";
 import ChooseSpecialty from "./Pages/ChooseSpecialty";
 import RequireAuth from "./components/HOCs/RequireAuth";
 
+import { getEnrolleeByUsername } from "./api/enrollee";
+import { addToStore, addToState } from "./store/main/reducer";
+import { updateRequestMethod } from "./store/info/reducer";
+import { _transformSpecialty } from "./helpers/transformResults";
+
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("username") &&
+      sessionStorage.getItem("password")
+    ) {
+      getEnrolleeByUsername(
+        sessionStorage.getItem("username"),
+        sessionStorage.getItem("password")
+      )
+        .then((data) => {
+          dispatch(updateRequestMethod("PUT"));
+          dispatch(
+            addToStore({
+              birthday: data.birthday,
+              educationalEstablishment: data.educationalEstablishment,
+              id: data.id,
+              legalRepresentative: data.legalRepresentative,
+              mainAddress: data.mainAddress,
+              passport: data.passport,
+              person: data.person,
+              specialities: data.specialities.map(_transformSpecialty),
+              user: data.user,
+              userSDOS: data.userSDOS,
+            })
+          );
+          dispatch(addToState());
+          setTimeout(() => setIsLoading(true), 1000);
+        })
+        .catch((e) => {
+          setIsLoading(true);
+          dispatch(updateRequestMethod("POST"));
+          console.error(e);
+        });
+    }
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -20,7 +67,11 @@ function App() {
           path="main"
           element={
             <RequireAuth>
-              <PersonalData />
+              {isLoading ? (
+                <PersonalData dataLoading={isLoading} />
+              ) : (
+                <div>LOADING</div>
+              )}
             </RequireAuth>
           }
         />

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +8,12 @@ import { addToStore, addToState } from "../../store/main/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
 
-import "./styled.css";
-import { useEffect } from "react";
 import { getEnrolleeByUsername } from "../../api/enrollee";
+import { _transformSpecialty } from "../../helpers/transformResults";
 
-function PersonalData() {
+import "./styled.css";
+
+function PersonalData({ dataLoading }) {
   const userInfo = useSelector((state) => state.main);
   const person = useSelector((state) => state.main.person);
   const mainAddress = useSelector((state) => state.main.mainAddress);
@@ -31,21 +33,55 @@ function PersonalData() {
   });
 
   useEffect(() => {
-    getEnrolleeByUsername(
-      sessionStorage.getItem("username"),
-      sessionStorage.getItem("password")
-    )
-      .then((data) => {
-        dispatch(addToStore(data));
-        dispatch(addToState());
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }, [dispatch]);
+    // getEnrolleeByUsername(
+    //   sessionStorage.getItem("username"),
+    //   sessionStorage.getItem("password")
+    // )
+    //   .then((data) => {
+    //     dispatch(
+    //       addToStore({
+    //         birthday: data.birthday,
+    //         educationalEstablishment: data.educationalEstablishment,
+    //         id: data.id,
+    //         legalRepresentative: data.legalRepresentative,
+    //         mainAddress: data.mainAddress,
+    //         passport: data.passport,
+    //         person: data.person,
+    //         specialities: data.specialities.map(_transformSpecialty),
+    //         user: data.user,
+    //         userSDOS: data.userSDOS,
+    //       })
+    //     );
+    //     dispatch(addToState());
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    console.log(dataLoading);
+  }, [dataLoading, dispatch]);
 
   const onSubmit = (inputs) => {
     const user = JSON.parse(sessionStorage.getItem("user"));
+    // if (educationalEstablishment.id) {
+    //   inputs.educationalEstablishment.id = educationalEstablishment.id;
+    // }
+    // if (userInfo.id) {
+    //   inputs.id = userInfo.id;
+    // }
+    // if (mainAddress.id) {
+    //   inputs.mainAddress.id = mainAddress.id;
+    // }
+    // // if (address.id) {
+    // //   inputs.address.id = address.id;
+    // // }
+    // if (passport.id) {
+    //   inputs.passport.id = passport.id;
+    // }
+    // if (person.id) {
+    //   inputs.person.id = person.id;
+    // }
+    // inputs.person.agreed = true;
+    console.log(inputs);
     dispatch(addToStore({ ...inputs, user }));
     dispatch(addToState());
     navigate("/representative");
@@ -72,7 +108,7 @@ function PersonalData() {
                   className="InputContent mr30 w172"
                   type="text"
                   placeholder="Введите имя"
-                  defaultValue={person ? person.name : null}
+                  defaultValue={person.name ? person.name : null}
                   required
                 />
               </div>
@@ -83,7 +119,7 @@ function PersonalData() {
                   className="InputContent mr30 w266"
                   type="text"
                   placeholder="Введите фамилию"
-                  defaultValue={person ? person.surname : null}
+                  defaultValue={person.surname ? person.surname : null}
                   required
                 />
               </div>
@@ -94,7 +130,7 @@ function PersonalData() {
                   className="InputContent w274"
                   type="text"
                   placeholder="Введите отчество"
-                  defaultValue={person ? person.patronymic : null}
+                  defaultValue={person.patronymic ? person.patronymic : null}
                   required
                 />
               </div>
@@ -115,7 +151,7 @@ function PersonalData() {
                   {...register("person.phoneNumber")}
                   className="InputContent mr30 w266"
                   placeholder="Введите номер телефона"
-                  defaultValue={person ? person.phoneNumber : null}
+                  defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
                   required
                 />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
 
@@ -10,6 +10,12 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
   const [componentSpecialties, setComponentSpecialties] = useState({});
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (defaultValue && Object.keys(componentSpecialties).length === 0) {
+      setComponentSpecialties(specialties[defaultValue]);
+    }
+  }, [componentSpecialties, defaultValue, specialties]);
 
   function specialtyToStore(item, number) {
     const { label, value, code, subjectName, seatsNumber } = item;
@@ -25,14 +31,7 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
   return (
     <div className="FormInnerContent">
       <div className="InputWrapper">
-        <p className="InputTitle">Наименование специальности №1</p>
-        {console.log(defaultValue)}
-        {/* {console.log(
-          specialties[
-            specialties.findIndex((item) => item.name === defaultValue.name)
-          ]
-        )} */}
-        {console.log(specialties)}
+        <p className="InputTitle">Наименование специальности №{number + 1}</p>
         {specialties & defaultValue ? (
           <Select
             className="SelectContent"
@@ -41,11 +40,7 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
             }
             options={specialties}
             onChange={(item) => specialtyToStore(item, number)}
-            defaultValue={
-              specialties[
-                specialties.findIndex((item) => item.name === defaultValue.name)
-              ]
-            }
+            defaultValue={specialties[defaultValue]}
             required
           />
         ) : (
@@ -56,6 +51,7 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
             }
             options={specialties}
             onChange={(item) => specialtyToStore(item, number)}
+            defaultValue={specialties[defaultValue]}
             required
           />
         )}

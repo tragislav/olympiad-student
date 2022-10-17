@@ -16,6 +16,9 @@ function LegalRepresentative() {
     (state) => state.main.legalRepresentative.passport
   );
   const person = useSelector((state) => state.main.legalRepresentative.person);
+  const legalRepresentative = useSelector(
+    (state) => state.main.legalRepresentative
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,6 +33,17 @@ function LegalRepresentative() {
 
   const onSubmit = (inputs) => {
     inputs.legalRepresentative.person.agreed = agreed;
+    // if (legalRepresentative.id) {
+    //   inputs.legalRepresentative.id = legalRepresentative.id;
+    // }
+    // if (passport.id) {
+    //   console.log(passport.id);
+    //   console.log(inputs.passport.id);
+    //   inputs.passport.id = passport.id;
+    // }
+    // if (person.id) {
+    //   inputs.person.id = person.id;
+    // }
     console.log(inputs);
     dispatch(addToStore(inputs));
     dispatch(addToState());

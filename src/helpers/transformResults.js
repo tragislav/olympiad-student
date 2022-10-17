@@ -13,11 +13,13 @@ export const _transformSpecialty = (item) => {
 const _transformEducation = (item) => {
   return {
     name: item.name,
+    id: item.id,
   };
 };
 
 const _transformRepresentative = (item) => {
   return {
+    id: item.id,
     passport: _transformPassport(item.passport),
     person: _transformPerson(item.person),
   };
@@ -25,6 +27,7 @@ const _transformRepresentative = (item) => {
 
 const _transformAddress = (item) => {
   return {
+    id: item.id,
     address: {
       district: item.address.district,
       locality: item.address.locality,
@@ -39,6 +42,7 @@ const _transformAddress = (item) => {
 
 const _transformPassport = (item) => {
   return {
+    id: item.id,
     documentType: item.documentType,
     identificationNumber: item.identificationNumber,
     number: item.number,
@@ -52,20 +56,15 @@ const _transformPerson = ({
   patronymic,
   phoneNumber,
   surname,
+  id,
 }) => {
   return {
+    id,
     agreed,
     name,
     patronymic,
     phoneNumber,
     surname,
-  };
-};
-
-const _transformUser = ({ id, username }) => {
-  return {
-    id,
-    username,
   };
 };
 
@@ -80,6 +79,7 @@ export const _transformEnrollee = (item) => {
     passport: _transformPassport(item.passport),
     person: _transformPerson(item.person),
     specialities: item.specialities.map(_transformSpecialty),
-    user: _transformUser(item.user),
+    user: item.user,
+    id: item.id,
   };
 };

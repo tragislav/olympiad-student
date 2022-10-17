@@ -32,8 +32,14 @@ function Registration() {
     const { username, password, repeatPassword, email } = inputs;
     password === repeatPassword
       ? userRegistration(email, username, password)
-          .then((data) => console.log(data))
-          .catch((e) => console.log(e))
+          .then((data) => {
+            console.log(data);
+            alert("Регистрация прошла");
+          })
+          .catch((e) => {
+            console.error(e);
+            alert("Регистрация не прошла");
+          })
       : setError({ ...error, againPassword: true });
   };
 
@@ -86,7 +92,6 @@ function Registration() {
             <ErrorIcon />
             <p className="LoginFormError">Неверный пароль</p>
           </div>
-          {console.log(error)}
           <input
             className={
               error.againPassword

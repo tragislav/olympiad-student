@@ -4,6 +4,7 @@ import { _transformSpecialty } from "../../helpers/transformResults";
 
 const initialState = {
   specialties: null,
+  requestMethod: null,
 };
 
 export const getSpecialties = createAsyncThunk(
@@ -20,7 +21,11 @@ export const getSpecialties = createAsyncThunk(
 const infoReducer = createSlice({
   name: "info",
   initialState,
-  reducers: {},
+  reducers: {
+    updateRequestMethod: (state, action) => {
+      state.requestMethod = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getSpecialties.fulfilled, (state, action) => {
       state.specialties = action.payload;
@@ -28,6 +33,6 @@ const infoReducer = createSlice({
   },
 });
 
-export const {} = infoReducer.actions;
+export const { updateRequestMethod } = infoReducer.actions;
 
 export default infoReducer.reducer;
