@@ -1,17 +1,33 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import {
+  setPrivacyPolicy,
+  setDataProcessing,
+} from "../../store/processing/reducer";
+
+import { addToStore } from "../../store/main/reducer";
 
 import "./styled.css";
 
 function ProcessingData({ notFirst, btnText, backTo }) {
-  const [privacyPolicy, setPrivacyPolicy] = useState(false);
-  const [dataProcessing, setDataProcessing] = useState(false);
   const [disable, setDisable] = useState(true);
 
+  const dataProcessing = useSelector(
+    (state) => state.processing.dataProcessing
+  );
+  const privacyPolicy = useSelector((state) => state.processing.privacyPolicy);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    privacyPolicy && dataProcessing ? setDisable(false) : setDisable(true);
+    if (privacyPolicy && dataProcessing) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
   }, [dataProcessing, privacyPolicy]);
 
   return (
@@ -29,7 +45,8 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 className="RadioItem"
                 type="checkbox"
                 name="privacyPolicy"
-                onChange={() => setPrivacyPolicy(!privacyPolicy)}
+                checked={privacyPolicy}
+                onChange={() => dispatch(setPrivacyPolicy(!privacyPolicy))}
               />
               Политика конфиденциальности
             </label>
@@ -39,8 +56,9 @@ function ProcessingData({ notFirst, btnText, backTo }) {
               <input
                 className="RadioItem"
                 type="checkbox"
+                checked={dataProcessing}
                 name="dataProcessing"
-                onChange={() => setDataProcessing(!dataProcessing)}
+                onChange={() => dispatch(setDataProcessing(!dataProcessing))}
               />
               Обработка данных в соответствии с законом о персональных данных от
               7 мая 2021 г. № 99-3.

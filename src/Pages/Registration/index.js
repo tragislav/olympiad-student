@@ -1,11 +1,24 @@
+import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-
-import schema from "./validation";
-import "./styled.css";
 import { Link } from "react-router-dom";
 
+import { userRegistration } from "../../api/auth";
+
+import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
+
+import schema from "./validation";
+
+import "./styled.css";
+
 function Registration() {
+  const [error, setError] = useState({
+    username: false,
+    password: false,
+    againPassword: false,
+    email: false,
+  });
+
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -17,12 +30,17 @@ function Registration() {
 
   const onSubmit = (inputs) => {
     const { username, password, repeatPassword, email } = inputs;
-    console.log(inputs);
-    console.log(username, "username");
-    console.log(password, "password");
-    console.log(repeatPassword, "repeatPassword");
-    console.log(email, "email");
-    console.log(password === repeatPassword);
+    password === repeatPassword
+      ? userRegistration(email, username, password)
+          .then((data) => {
+            console.log(data);
+            alert("Регистрация прошла");
+          })
+          .catch((e) => {
+            console.error(e);
+            alert("Регистрация не прошла");
+          })
+      : setError({ ...error, againPassword: true });
   };
 
   return (
@@ -31,7 +49,11 @@ function Registration() {
         <h3 className="RegistrationFormTitle">Регистрация</h3>
         <form className="RegistrationForm" onSubmit={handleSubmit(onSubmit)}>
           <input
-            className="RegistrationFormInput"
+            className={
+              error.username
+                ? "RegistrationFormInput errorInput"
+                : "RegistrationFormInput"
+            }
             ref={username.ref}
             name={username.name}
             onBlur={username.onBlur}
@@ -40,8 +62,20 @@ function Registration() {
             placeholder="Введите логин"
             required
           />
+          <div
+            className={
+              error.username ? "ErrorWrapper opacity1" : "ErrorWrapper"
+            }
+          >
+            <ErrorIcon />
+            <p className="LoginFormError">Неверное имя пользователя</p>
+          </div>
           <input
-            className="RegistrationFormInput"
+            className={
+              error.password
+                ? "RegistrationFormInput errorInput"
+                : "RegistrationFormInput"
+            }
             ref={password.ref}
             name={password.name}
             onBlur={password.onBlur}
@@ -50,8 +84,20 @@ function Registration() {
             placeholder="Введите пароль"
             required
           />
+          <div
+            className={
+              error.password ? "ErrorWrapper opacity1" : "ErrorWrapper"
+            }
+          >
+            <ErrorIcon />
+            <p className="LoginFormError">Неверный пароль</p>
+          </div>
           <input
-            className="RegistrationFormInput"
+            className={
+              error.againPassword
+                ? "RegistrationFormInput errorInput"
+                : "RegistrationFormInput"
+            }
             ref={repeatPassword.ref}
             name={repeatPassword.name}
             onBlur={repeatPassword.onBlur}
@@ -60,8 +106,20 @@ function Registration() {
             placeholder="Потвердите ваш пароль"
             required
           />
+          <div
+            className={
+              error.againPassword ? "ErrorWrapper opacity1" : "ErrorWrapper"
+            }
+          >
+            <ErrorIcon />
+            <p className="LoginFormError">Пароли не совпадают</p>
+          </div>
           <input
-            className="RegistrationFormInput"
+            className={
+              error.email
+                ? "RegistrationFormInput errorInput"
+                : "RegistrationFormInput"
+            }
             ref={email.ref}
             name={email.name}
             onBlur={email.onBlur}
@@ -70,6 +128,12 @@ function Registration() {
             placeholder="Введите адрес электронной почты"
             required
           />
+          <div
+            className={error.email ? "ErrorWrapper opacity1" : "ErrorWrapper"}
+          >
+            <ErrorIcon />
+            <p className="LoginFormError">Пароли не совпадают</p>
+          </div>
           <button className="RegistrationFormSubmit" type="submit">
             Зарегестрироваться
           </button>

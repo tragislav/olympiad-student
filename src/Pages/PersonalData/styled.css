@@ -71,26 +71,8 @@
 }
 
 .InputContent {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #505050;
-  background: #ffffff;
-  border: 2px solid #ebebeb;
-  border-radius: 7px;
   height: 55px;
   padding-left: 20px;
-}
-
-.InputContent::placeholder {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #9a9a9a;
 }
 
 .InputContent::-webkit-datetime-edit-text,
@@ -105,8 +87,4 @@
 
 .InputContent::-webkit-calendar-picker-indicator {
   padding-right: 20px;
-}
-
-.DisabledInput {
-  background: #ededed;
 }

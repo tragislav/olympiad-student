@@ -35,20 +35,10 @@
 .RegistrationFormInput {
   width: 100%;
   height: 55px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding-left: 20px;
-  border: 2px solid #ebebeb;
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgb(201 201 201 10%);
-  border-radius: 7px;
-}
-
-.RegistrationFormInput::placeholder {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
 }
 
 .RegistrationFormSubmit {
@@ -78,4 +68,10 @@
   font-size: 16px;
   line-height: 19px;
   color: #434c63;
+}
+
+.errorInput {
+  background: #ffffff;
+  border: 2px solid #ffb0a5;
+  color: #ffb0a5;
 }

@@ -1,28 +1,63 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { authByUsername } from "../../api/auth";
+
+import { useAuth } from "../../hooks/useAuth";
+
 import schema from "./validation";
+
+import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
+
 import "./styled.css";
 
-function Login() {
+function Login({ loginStatus }) {
   const [disable, setDisable] = useState(false);
-  const { register, handleSubmit } = useForm({
+  const [error, setError] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { signIn } = useAuth();
+
+  const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const getFormData = (object) => {
-    const formData = new FormData();
-    Object.keys(object).forEach((key) => {
-      formData.append(key, object[key]);
-    });
-    return formData;
-  };
+  useEffect(() => {
+    if (sessionStorage.getItem("user")) {
+      signIn(JSON.parse(sessionStorage.getItem("user")), () =>
+        navigate(location.state ? location.state?.from : `/main`, {
+          replace: true,
+        })
+      );
+      loginStatus();
+    }
+  }, [location, loginStatus, navigate, signIn]);
 
-  const onSubmit = (inputs) => {
+  const onSubmit = ({ username, password }) => {
     setDisable(true);
-    console.log(inputs);
+    authByUsername(username, password)
+      .then((data) => {
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("password", password);
+        sessionStorage.setItem("user", JSON.stringify(data));
+        reset();
+        loginStatus();
+        signIn(data, () =>
+          navigate(`/main`, {
+            replace: true,
+          })
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+        setError(true);
+        setDisable(false);
+        setTimeout(() => setError(false), 5000);
+      });
   };
 
   const username = register("username");
@@ -32,6 +67,11 @@ function Login() {
     <div className="LoginContainer">
       <div className="LoginFormWrapper">
         <h3 className="LoginFormTitle">Вход в личный кабинет</h3>
+        {error ? (
+          <p className="LoginFormError">
+            Ошибка авторизации, попробуйте ещё раз
+          </p>
+        ) : null}
         <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
           <input
             className="LoginFormInput"
@@ -53,7 +93,7 @@ function Login() {
             placeholder="Ваш Пароль"
             required
           />
-          <button className="LoginFormSubmit" type="submit">
+          <button className="LoginFormSubmit" type="submit" disabled={disable}>
             Войти
           </button>
         </form>

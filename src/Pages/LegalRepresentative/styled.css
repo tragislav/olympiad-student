@@ -14,6 +14,7 @@
 
 .RadioItem {
   -webkit-appearance: none;
+  -webkit-box-shadow: none;
   -moz-appearance: none;
   appearance: none;
   content: url("../../images/unselected-check-mark.svg");
@@ -22,7 +23,6 @@
   height: 20px;
   border-radius: 5px;
   border: none;
-  transition: 0.2s all linear;
   outline: none;
   margin-right: 5px;
   background: #e6e6e6;

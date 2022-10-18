@@ -1,7 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import merge from "lodash/merge";
 
 const initialState = {
-  info: {},
+  educationalEstablishment: {},
+  legalRepresentative: {
+    passport: {},
+    person: {},
+  },
+  mainAddress: {
+    address: {},
+  },
+  passport: {},
+  person: {},
+  specialities: [],
+  user: {},
 };
 
 const mainReducer = createSlice({
@@ -10,20 +22,25 @@ const mainReducer = createSlice({
   reducers: {
     addToStore: (state, action) => {
       Object.keys(action.payload).forEach(function (prop) {
-        state.info[prop] = action.payload[prop];
+        state[prop] = action.payload[prop];
       });
+    },
+    addSpecialty: (state, action) => {
+      const { number, spec } = action.payload;
+      state.specialities[number] = spec;
     },
     addToState: (state) => {
       localStorage.removeItem("info");
       localStorage.getItem("info");
-      localStorage.setItem("info", JSON.stringify(state.info));
-      // Object.keys(action.payload).forEach(function (prop) {
-      //   state.info[prop] = action.payload[prop];
-      // });
+      localStorage.setItem("info", JSON.stringify(state));
+    },
+    updateStore: (state, action) => {
+      state = merge(state, action.payload);
     },
   },
 });
 
-export const { addToStore, addToState } = mainReducer.actions;
+export const { addToStore, addToState, addSpecialty, updateStore } =
+  mainReducer.actions;
 
 export default mainReducer.reducer;

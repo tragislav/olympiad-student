@@ -1,16 +1,29 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { addToStore, addToState } from "../../store/main/reducer";
+import { addToStore, addToState, updateStore } from "../../store/main/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
 
+import { getEnrolleeByUsername } from "../../api/enrollee";
+import { _transformSpecialty } from "../../helpers/transformResults";
+
 import "./styled.css";
 
-function PersonalData() {
-  const userInfo = useSelector((state) => state.main.info);
+function PersonalData({ dataLoading }) {
+  const userInfo = useSelector((state) => state.main);
+  const person = useSelector((state) => state.main.person);
+  const mainAddress = useSelector((state) => state.main.mainAddress);
+  const address = useSelector((state) => state.main.mainAddress.address);
+  const educationalEstablishment = useSelector(
+    (state) => state.main.educationalEstablishment
+  );
+  const passport = useSelector((state) => state.main.passport);
+  const email = JSON.parse(sessionStorage.getItem("user")).email;
+  const requestMethod = useSelector((state) => state.info.requestMethod);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,11 +32,53 @@ function PersonalData() {
     // resolver: yupResolver(schema),
   });
 
+  // useEffect(() => {
+  //   getEnrolleeByUsername(
+  //     sessionStorage.getItem("username"),
+  //     sessionStorage.getItem("password")
+  //   )
+  //     .then((data) => {
+  //       dispatch(
+  //         addToStore({
+  //           birthday: data.birthday,
+  //           educationalEstablishment: data.educationalEstablishment,
+  //           id: data.id,
+  //           legalRepresentative: data.legalRepresentative,
+  //           mainAddress: data.mainAddress,
+  //           passport: data.passport,
+  //           person: data.person,
+  //           specialities: data.specialities.map(_transformSpecialty),
+  //           user: data.user,
+  //           userSDOS: data.userSDOS,
+  //         })
+  //       );
+  //       dispatch(addToState());
+  //     })
+  //     .catch((e) => {
+  //       console.error(e);
+  //     });
+  // }, [dataLoading, dispatch]);
+
   const onSubmit = (inputs) => {
     console.log(inputs);
-    dispatch(addToStore(inputs));
-    dispatch(addToState());
-    navigate("/representative");
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    switch (requestMethod) {
+      case "POST":
+        dispatch(addToStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+      case "PUT":
+        dispatch(updateStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+      default:
+        dispatch(addToStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+    }
   };
 
   return (
@@ -43,56 +98,54 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Имя</p>
                 <input
-                  {...register("name")}
+                  {...register("person.name")}
                   className="InputContent mr30 w172"
                   type="text"
                   placeholder="Введите имя"
-                  defaultValue={userInfo.name ? userInfo.name : null}
+                  defaultValue={person.name ? person.name : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>
                 <input
-                  {...register("surname")}
+                  {...register("person.surname")}
                   className="InputContent mr30 w266"
                   type="text"
                   placeholder="Введите фамилию"
-                  defaultValue={userInfo.surname ? userInfo.surname : null}
+                  defaultValue={person.surname ? person.surname : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Отчество</p>
                 <input
-                  {...register("patronymic")}
+                  {...register("person.patronymic")}
                   className="InputContent w274"
                   type="text"
                   placeholder="Введите отчество"
-                  defaultValue={
-                    userInfo.patronymic ? userInfo.patronymic : null
-                  }
+                  defaultValue={person.patronymic ? person.patronymic : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Дата рождения</p>
                 <input
-                  {...register("date")}
+                  {...register("birthday")}
                   className="InputContent mr30 w172"
                   type="date"
                   placeholder="дд.мм.гггг"
-                  defaultValue={userInfo.date ? userInfo.date : null}
+                  defaultValue={userInfo.birthday ? userInfo.birthday : null}
                   required
                 />
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Телефон</p>
                 <input
-                  {...register("phone")}
+                  {...register("person.phoneNumber")}
                   className="InputContent mr30 w266"
                   placeholder="Введите номер телефона"
-                  defaultValue={userInfo.phone ? userInfo.phone : null}
+                  defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
                   required
                 />
@@ -100,9 +153,8 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Эл.почта</p>
                 <input
-                  {...register("email")}
-                  className="InputContent DisabledInput w274"
-                  defaultValue={"s.dykomenko@gmail.com"}
+                  className="InputContent w274"
+                  defaultValue={email}
                   type="email"
                   disabled
                 />
@@ -115,10 +167,10 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Область</p>
                 <input
-                  {...register("region")}
+                  {...register("mainAddress.address.region")}
                   className="InputContent mr30 w172"
                   placeholder="Введите область"
-                  defaultValue={userInfo.region ? userInfo.region : null}
+                  defaultValue={address.region ? address.region : null}
                   type="text"
                   required
                 />
@@ -126,10 +178,10 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Район</p>
                 <input
-                  {...register("area")}
+                  {...register("mainAddress.address.district")}
                   className="InputContent mr30 w266"
                   placeholder="Введите район"
-                  defaultValue={userInfo.area ? userInfo.area : null}
+                  defaultValue={address.district ? address.district : null}
                   type="text"
                   required
                 />
@@ -137,10 +189,10 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Населённый пункт</p>
                 <input
-                  {...register("town")}
+                  {...register("mainAddress.address.locality")}
                   className="InputContent w274"
                   placeholder="Введите населённый пункт"
-                  defaultValue={userInfo.town ? userInfo.town : null}
+                  defaultValue={address.locality ? address.locality : null}
                   type="text"
                   required
                 />
@@ -148,10 +200,10 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Улица (проспект, переулок)</p>
                 <input
-                  {...register("street")}
+                  {...register("mainAddress.street")}
                   className="InputContent mr30 w468"
                   placeholder="Введите название улицы, проспекта, переулока"
-                  defaultValue={userInfo.street ? userInfo.street : null}
+                  defaultValue={mainAddress.street ? mainAddress.street : null}
                   type="text"
                   required
                 />
@@ -159,9 +211,9 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Дом</p>
                 <input
-                  {...register("house")}
+                  {...register("mainAddress.house")}
                   className="InputContent mr25 w73"
-                  defaultValue={userInfo.house ? userInfo.house : null}
+                  defaultValue={mainAddress.house ? mainAddress.house : null}
                   type="text"
                   required
                 />
@@ -169,9 +221,9 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Корп.</p>
                 <input
-                  {...register("frame")}
+                  {...register("mainAddress.frame")}
                   className="InputContent mr25 w73"
-                  defaultValue={userInfo.frame ? userInfo.frame : null}
+                  defaultValue={mainAddress.frame ? mainAddress.frame : null}
                   type="text"
                   required
                 />
@@ -179,9 +231,9 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Кв.</p>
                 <input
-                  {...register("flat")}
+                  {...register("mainAddress.flat")}
                   className="InputContent w73"
-                  defaultValue={userInfo.flat ? userInfo.flat : null}
+                  defaultValue={mainAddress.flat ? mainAddress.flat : null}
                   type="text"
                   required
                 />
@@ -189,11 +241,13 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Учебное учреждение</p>
                 <input
-                  {...register("establishment")}
+                  {...register("educationalEstablishment.name")}
                   className="InputContent w772"
                   placeholder="Выберите учебное учреждение"
                   defaultValue={
-                    userInfo.establishment ? userInfo.establishment : null
+                    educationalEstablishment.name
+                      ? educationalEstablishment.name
+                      : null
                   }
                   type="text"
                   required
@@ -207,11 +261,11 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Вид документа</p>
                 <input
-                  {...register("documentType")}
+                  {...register("passport.documentType")}
                   className="InputContent mr25 w172"
                   placeholder="Выбрать"
                   defaultValue={
-                    userInfo.documentType ? userInfo.documentType : null
+                    passport.documentType ? passport.documentType : null
                   }
                   type="text"
                   required
@@ -220,11 +274,9 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
                 <input
-                  {...register("documentSeries")}
+                  {...register("passport.series")}
                   className="InputContent mr25 w91"
-                  defaultValue={
-                    userInfo.documentSeries ? userInfo.documentSeries : null
-                  }
+                  defaultValue={passport.series ? passport.series : null}
                   type="text"
                   required
                 />
@@ -232,11 +284,9 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Номер</p>
                 <input
-                  {...register("documentNumber")}
+                  {...register("passport.number")}
                   className="InputContent mr25 w155"
-                  defaultValue={
-                    userInfo.documentNumber ? userInfo.documentNumber : null
-                  }
+                  defaultValue={passport.number ? passport.number : null}
                   type="text"
                   required
                 />
@@ -244,11 +294,11 @@ function PersonalData() {
               <div className="InputWrapper">
                 <p className="InputTitle">Индентификационный номер</p>
                 <input
-                  {...register("identificationNumber")}
+                  {...register("passport.identificationNumber")}
                   className="InputContent w274"
                   defaultValue={
-                    userInfo.identificationNumber
-                      ? userInfo.identificationNumber
+                    passport.identificationNumber
+                      ? passport.identificationNumber
                       : null
                   }
                   type="text"

@@ -55,18 +55,8 @@
   height: 55px;
   margin-bottom: 20px;
   padding-left: 20px;
-  border: 2px solid #ebebeb;
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgb(201 201 201 10%);
-  border-radius: 7px;
-}
-
-.RecoveryFormInput::placeholder {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
 }
 
 .RecoveryFormSubmit {
