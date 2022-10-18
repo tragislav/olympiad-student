@@ -14,6 +14,7 @@ import "./styled.css";
 function ProcessingData({ notFirst, btnText, backTo }) {
   const [disable, setDisable] = useState(true);
 
+  const person = useSelector((state) => state.main.person);
   const dataProcessing = useSelector(
     (state) => state.processing.dataProcessing
   );
@@ -21,6 +22,13 @@ function ProcessingData({ notFirst, btnText, backTo }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (person.agreed) {
+      dispatch(setPrivacyPolicy(true));
+      dispatch(setDataProcessing(true));
+    }
+  }, [dispatch, person.agreed]);
 
   useEffect(() => {
     if (privacyPolicy && dataProcessing) {
