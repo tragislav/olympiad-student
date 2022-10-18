@@ -13,7 +13,7 @@ import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
 
 import "./styled.css";
 
-function Login() {
+function Login({ loginStatus }) {
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState(false);
 
@@ -44,6 +44,7 @@ function Login() {
         sessionStorage.setItem("password", password);
         sessionStorage.setItem("user", JSON.stringify(data));
         reset();
+        loginStatus();
         signIn(data, () =>
           navigate(`/main`, {
             replace: true,

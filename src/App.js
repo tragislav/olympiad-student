@@ -18,14 +18,12 @@ import { _transformSpecialty } from "./helpers/transformResults";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (
-      sessionStorage.getItem("username") &&
-      sessionStorage.getItem("password")
-    ) {
+    if (isLogin) {
       getEnrolleeByUsername(
         sessionStorage.getItem("username"),
         sessionStorage.getItem("password")
@@ -55,12 +53,16 @@ function App() {
           console.error(e);
         });
     }
-  }, [dispatch]);
+  }, [dispatch, isLogin]);
+
+  function loginStatus() {
+    return setIsLogin(true);
+  }
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Login />} />
+        <Route index element={<Login loginStatus={loginStatus} />} />
         <Route path="registration" element={<Registration />} />
         <Route path="passwordRecovery" element={<PasswordRecovery />} />
         <Route

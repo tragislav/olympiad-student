@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { addToStore, addToState } from "../../store/main/reducer";
+import { addToStore, addToState, updateStore } from "../../store/main/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
 
@@ -22,8 +22,8 @@ function PersonalData({ dataLoading }) {
     (state) => state.main.educationalEstablishment
   );
   const passport = useSelector((state) => state.main.passport);
-
   const email = JSON.parse(sessionStorage.getItem("user")).email;
+  const requestMethod = useSelector((state) => state.info.requestMethod);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,59 +32,53 @@ function PersonalData({ dataLoading }) {
     // resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    // getEnrolleeByUsername(
-    //   sessionStorage.getItem("username"),
-    //   sessionStorage.getItem("password")
-    // )
-    //   .then((data) => {
-    //     dispatch(
-    //       addToStore({
-    //         birthday: data.birthday,
-    //         educationalEstablishment: data.educationalEstablishment,
-    //         id: data.id,
-    //         legalRepresentative: data.legalRepresentative,
-    //         mainAddress: data.mainAddress,
-    //         passport: data.passport,
-    //         person: data.person,
-    //         specialities: data.specialities.map(_transformSpecialty),
-    //         user: data.user,
-    //         userSDOS: data.userSDOS,
-    //       })
-    //     );
-    //     dispatch(addToState());
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    console.log(dataLoading);
-  }, [dataLoading, dispatch]);
+  // useEffect(() => {
+  //   getEnrolleeByUsername(
+  //     sessionStorage.getItem("username"),
+  //     sessionStorage.getItem("password")
+  //   )
+  //     .then((data) => {
+  //       dispatch(
+  //         addToStore({
+  //           birthday: data.birthday,
+  //           educationalEstablishment: data.educationalEstablishment,
+  //           id: data.id,
+  //           legalRepresentative: data.legalRepresentative,
+  //           mainAddress: data.mainAddress,
+  //           passport: data.passport,
+  //           person: data.person,
+  //           specialities: data.specialities.map(_transformSpecialty),
+  //           user: data.user,
+  //           userSDOS: data.userSDOS,
+  //         })
+  //       );
+  //       dispatch(addToState());
+  //     })
+  //     .catch((e) => {
+  //       console.error(e);
+  //     });
+  // }, [dataLoading, dispatch]);
 
   const onSubmit = (inputs) => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    // if (educationalEstablishment.id) {
-    //   inputs.educationalEstablishment.id = educationalEstablishment.id;
-    // }
-    // if (userInfo.id) {
-    //   inputs.id = userInfo.id;
-    // }
-    // if (mainAddress.id) {
-    //   inputs.mainAddress.id = mainAddress.id;
-    // }
-    // // if (address.id) {
-    // //   inputs.address.id = address.id;
-    // // }
-    // if (passport.id) {
-    //   inputs.passport.id = passport.id;
-    // }
-    // if (person.id) {
-    //   inputs.person.id = person.id;
-    // }
-    // inputs.person.agreed = true;
     console.log(inputs);
-    dispatch(addToStore({ ...inputs, user }));
-    dispatch(addToState());
-    navigate("/representative");
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    switch (requestMethod) {
+      case "POST":
+        dispatch(addToStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+      case "PUT":
+        dispatch(updateStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+      default:
+        dispatch(addToStore({ ...inputs, user }));
+        dispatch(addToState());
+        navigate("/representative");
+        break;
+    }
   };
 
   return (

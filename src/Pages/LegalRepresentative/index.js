@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { addToStore, addToState } from "../../store/main/reducer";
+import { addToStore, addToState, updateStore } from "../../store/main/reducer";
 
 import "./styled.css";
 import ProcessingData from "../../components/ProcessingData";
@@ -19,6 +19,7 @@ function LegalRepresentative() {
   const legalRepresentative = useSelector(
     (state) => state.main.legalRepresentative
   );
+  const requestMethod = useSelector((state) => state.info.requestMethod);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,21 +34,23 @@ function LegalRepresentative() {
 
   const onSubmit = (inputs) => {
     inputs.legalRepresentative.person.agreed = agreed;
-    // if (legalRepresentative.id) {
-    //   inputs.legalRepresentative.id = legalRepresentative.id;
-    // }
-    // if (passport.id) {
-    //   console.log(passport.id);
-    //   console.log(inputs.passport.id);
-    //   inputs.passport.id = passport.id;
-    // }
-    // if (person.id) {
-    //   inputs.person.id = person.id;
-    // }
-    console.log(inputs);
-    dispatch(addToStore(inputs));
-    dispatch(addToState());
-    navigate("/specialty");
+    switch (requestMethod) {
+      case "POST":
+        dispatch(addToStore(inputs));
+        dispatch(addToState());
+        navigate("/specialty");
+        break;
+      case "PUT":
+        dispatch(updateStore(inputs));
+        dispatch(addToState());
+        navigate("/specialty");
+        break;
+      default:
+        dispatch(addToStore(inputs));
+        dispatch(addToState());
+        navigate("/specialty");
+        break;
+    }
   };
 
   return (

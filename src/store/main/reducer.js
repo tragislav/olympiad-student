@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import merge from "lodash/merge";
 
 const initialState = {
   educationalEstablishment: {},
@@ -33,9 +34,13 @@ const mainReducer = createSlice({
       localStorage.getItem("info");
       localStorage.setItem("info", JSON.stringify(state));
     },
+    updateStore: (state, action) => {
+      state = merge(state, action.payload);
+    },
   },
 });
 
-export const { addToStore, addToState, addSpecialty } = mainReducer.actions;
+export const { addToStore, addToState, addSpecialty, updateStore } =
+  mainReducer.actions;
 
 export default mainReducer.reducer;
