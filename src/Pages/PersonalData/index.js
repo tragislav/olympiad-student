@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addToStore, addToState, updateStore } from "../../store/main/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
+import PageNavigation from "../../components/PageNavigation";
 
 import { getEnrolleeByUsername } from "../../api/enrollee";
 import { _transformSpecialty } from "../../helpers/transformResults";
@@ -84,6 +85,7 @@ function PersonalData() {
       <form onSubmit={handleSubmit(onSubmit)} className="MainWrapperForm">
         <div className="EmptyDiv" />
         <div className="FormWrapper">
+          <PageNavigation pageNumber={1} />
           <div className="FormInner">
             <h2 className="FormInnerTitle">
               Ф.И.О / Дата рождения / Телефон / Email

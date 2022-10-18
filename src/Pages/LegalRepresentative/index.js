@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,9 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { addToStore, addToState, updateStore } from "../../store/main/reducer";
 
-import "./styled.css";
 import ProcessingData from "../../components/ProcessingData";
-import { useEffect, useState } from "react";
+import PageNavigation from "../../components/PageNavigation";
+
+import "./styled.css";
 
 function LegalRepresentative() {
   const [agreed, setAgreed] = useState(false);
@@ -58,6 +60,7 @@ function LegalRepresentative() {
       <form onSubmit={handleSubmit(onSubmit)} className="MainWrapperForm">
         <div className="EmptyDiv" />
         <div className="FormWrapper">
+          <PageNavigation pageNumber={2} />
           <div className="FormInner">
             {/* <div className="RepresentativeType">
               <h3 className="FormInnerTitle">Выбрать:</h3>
