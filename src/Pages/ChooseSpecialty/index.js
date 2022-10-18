@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addToState } from "../../store/main/reducer";
+import { addToState, deleteSpecialty } from "../../store/main/reducer";
 import { getSpecialties } from "../../store/info/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
@@ -14,6 +14,7 @@ import { postEnrolleesData, putUserEnrollee } from "../../api/enrollee";
 
 function ChooseSpecialty() {
   const [secondSpec, setSecondSpec] = useState(false);
+  const [emptySpec, setEmptySpec] = useState(false);
 
   const specialties = useSelector((state) => state.info.specialties);
   const requestMethod = useSelector((state) => state.info.requestMethod);
@@ -33,10 +34,18 @@ function ChooseSpecialty() {
     );
   }, [dispatch]);
 
+  useEffect(() => {
+    userSpecialties.length === 2 ? setSecondSpec(true) : setSecondSpec(false);
+    switch (userSpecialties.length) {
+      case 2:
+        break;
+      default:
+        break;
+    }
+  }, [userSpecialties.length]);
+
   const onSubmit = () => {
-    console.log(requestMethod);
-    console.log(JSON.stringify(_transformEnrollee(userInfo)));
-    // dispatch(addToState());
+    dispatch(addToState());
     switch (requestMethod) {
       case "POST":
         postEnrolleesData(
@@ -79,16 +88,22 @@ function ChooseSpecialty() {
   };
 
   function indexOfSpec(arr, rrr, number) {
-    if (userSpecialties.length) {
+    if (userSpecialties[number]) {
+      console.log(userSpecialties);
       return arr.findIndex((item) => item.value === rrr[number].value);
     } else {
       return null;
     }
   }
 
+  function deleteSecondSpecialty() {
+    setSecondSpec(false);
+    dispatch(deleteSpecialty());
+  }
+
   return (
     <div className="MainWrapper">
-      {userSpecialties && specialties && (
+      {specialties && (
         <form onSubmit={handleSubmit(onSubmit)} className="MainWrapperForm">
           <div className="EmptyDiv" />
           <div className="FormWrapper">
@@ -104,19 +119,38 @@ function ChooseSpecialty() {
                 number={0}
                 defaultValue={indexOfSpec(specialties, userSpecialties, 0)}
               />
-            </div>
-            <div className="FormInner">
-              <h2 className="FormInnerTitle">Выбор специальности</h2>
-              <p className="FormInnerText">
-                У вас есть возможность выбрать две специальности, для того что
-                добавить вторую специальности необходимо заполнить первую
-                специальность и нажать на кнопку «Добавить специальность»
-              </p>
-              <SpecialtyItem
-                specialties={specialties}
-                number={0}
-                defaultValue={indexOfSpec(specialties, userSpecialties, 0)}
-              />
+              {secondSpec ? (
+                <>
+                  <SpecialtyItem
+                    specialties={specialties}
+                    number={1}
+                    defaultValue={indexOfSpec(specialties, userSpecialties, 1)}
+                  />
+                  <div className="FormInnerContent">
+                    <div className="InputWrapper">
+                      <button
+                        type="button"
+                        className="SpecSubmit"
+                        onClick={() => deleteSecondSpecialty()}
+                      >
+                        Удалить вторую специальность
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="FormInnerContent">
+                  <div className="InputWrapper">
+                    <button
+                      type="button"
+                      className="SpecSubmit"
+                      onClick={() => setSecondSpec(true)}
+                    >
+                      Добавить специальность
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <ProcessingData

@@ -43,7 +43,6 @@ const _transformAddress = (item) => {
 const _transformPassport = (item) => {
   return {
     id: item.id,
-    documentType: item.documentType,
     identificationNumber: item.identificationNumber,
     number: item.number,
     series: item.series,
