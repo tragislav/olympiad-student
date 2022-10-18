@@ -33,8 +33,9 @@ function Login({ loginStatus }) {
           replace: true,
         })
       );
+      loginStatus();
     }
-  }, [location, navigate, signIn]);
+  }, [location, loginStatus, navigate, signIn]);
 
   const onSubmit = ({ username, password }) => {
     setDisable(true);

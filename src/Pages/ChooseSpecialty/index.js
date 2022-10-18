@@ -13,6 +13,8 @@ import { _transformEnrollee } from "../../helpers/transformResults";
 import { postEnrolleesData, putUserEnrollee } from "../../api/enrollee";
 
 function ChooseSpecialty() {
+  const [secondSpec, setSecondSpec] = useState(false);
+
   const specialties = useSelector((state) => state.info.specialties);
   const requestMethod = useSelector((state) => state.info.requestMethod);
   const userInfo = useSelector((state) => state.main);
@@ -90,6 +92,19 @@ function ChooseSpecialty() {
         <form onSubmit={handleSubmit(onSubmit)} className="MainWrapperForm">
           <div className="EmptyDiv" />
           <div className="FormWrapper">
+            <div className="FormInner">
+              <h2 className="FormInnerTitle">Выбор специальности</h2>
+              <p className="FormInnerText">
+                У вас есть возможность выбрать две специальности, для того что
+                добавить вторую специальности необходимо заполнить первую
+                специальность и нажать на кнопку «Добавить специальность»
+              </p>
+              <SpecialtyItem
+                specialties={specialties}
+                number={0}
+                defaultValue={indexOfSpec(specialties, userSpecialties, 0)}
+              />
+            </div>
             <div className="FormInner">
               <h2 className="FormInnerTitle">Выбор специальности</h2>
               <p className="FormInnerText">
