@@ -31,8 +31,6 @@ function PersonalData() {
   const { register, handleSubmit } = useForm({
     // resolver: yupResolver(schema),
   });
-
-  // useEffect(() => {
   //   getEnrolleeByUsername(
   //     sessionStorage.getItem("username"),
   //     sessionStorage.getItem("password")
@@ -258,19 +256,6 @@ function PersonalData() {
           <div className="FormInner">
             <h2 className="FormInnerTitle">Паспортные данные</h2>
             <div className="FormInnerContent">
-              <div className="InputWrapper">
-                <p className="InputTitle">Вид документа</p>
-                <input
-                  {...register("passport.documentType")}
-                  className="InputContent mr25 w172"
-                  placeholder="Выбрать"
-                  defaultValue={
-                    passport.documentType ? passport.documentType : null
-                  }
-                  type="text"
-                  required
-                />
-              </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
                 <input

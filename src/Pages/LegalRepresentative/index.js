@@ -59,7 +59,7 @@ function LegalRepresentative() {
         <div className="EmptyDiv" />
         <div className="FormWrapper">
           <div className="FormInner">
-            <div className="RepresentativeType">
+            {/* <div className="RepresentativeType">
               <h3 className="FormInnerTitle">Выбрать:</h3>
               <div className="RepresentativeTypeItem">
                 <input
@@ -112,7 +112,8 @@ function LegalRepresentative() {
                 />
                 <label htmlFor="guardian">Опекун</label>
               </div>
-            </div>
+            </div> */}
+            <h2 className="FormInnerTitle">Личные данные представителя</h2>
             <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Имя</p>
@@ -148,18 +149,17 @@ function LegalRepresentative() {
                 />
               </div>
               <div className="InputWrapper">
-                <p className="InputTitle">Вид документа</p>
+                <p className="InputTitle">Телефон</p>
                 <input
-                  {...register("legalRepresentative.passport.documentType")}
-                  className="InputContent mr30 w172"
-                  placeholder="Выбрать"
-                  defaultValue={
-                    passport.documentType ? passport.documentType : null
-                  }
-                  type="text"
-                  required
+                  {...register("legalRepresentative.person.phoneNumber")}
+                  className="InputContent w266"
+                  defaultValue={person.phoneNumber ? person.phoneNumber : null}
+                  type="tel"
                 />
               </div>
+            </div>
+            <h2 className="FormInnerTitle">Паспортные данные представителя</h2>
+            <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
                 <input
@@ -185,7 +185,7 @@ function LegalRepresentative() {
                   {...register(
                     "legalRepresentative.passport.identificationNumber"
                   )}
-                  className="InputContent w274"
+                  className="InputContent mr30 w274"
                   defaultValue={
                     passport.identificationNumber
                       ? passport.identificationNumber
@@ -194,16 +194,8 @@ function LegalRepresentative() {
                   type="text"
                 />
               </div>
-              <div className="InputWrapper">
-                <p className="InputTitle">Телефон</p>
-                <input
-                  {...register("legalRepresentative.person.phoneNumber")}
-                  className="InputContent w266"
-                  defaultValue={person.phoneNumber ? person.phoneNumber : null}
-                  type="tel"
-                />
-              </div>
             </div>
+
             <div className="RepresentativeAgree">
               <label htmlFor="representativeAgree" className="ProcessingText">
                 <input
