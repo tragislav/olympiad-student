@@ -13,7 +13,7 @@ import { _transformSpecialty } from "../../helpers/transformResults";
 
 import "./styled.css";
 
-function PersonalData({ dataLoading }) {
+function PersonalData() {
   const userInfo = useSelector((state) => state.main);
   const person = useSelector((state) => state.main.person);
   const mainAddress = useSelector((state) => state.main.mainAddress);

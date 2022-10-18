@@ -69,11 +69,7 @@ function App() {
           path="main"
           element={
             <RequireAuth>
-              {isLoading ? (
-                <PersonalData dataLoading={isLoading} />
-              ) : (
-                <div>LOADING</div>
-              )}
+              {isLoading ? <PersonalData /> : <div>LOADING</div>}
             </RequireAuth>
           }
         />
@@ -81,7 +77,7 @@ function App() {
           path="representative"
           element={
             <RequireAuth>
-              <LegalRepresentative />
+              {isLoading ? <LegalRepresentative /> : <div>LOADING</div>}
             </RequireAuth>
           }
         />
@@ -89,7 +85,7 @@ function App() {
           path="specialty"
           element={
             <RequireAuth>
-              <ChooseSpecialty />
+              {isLoading ? <ChooseSpecialty /> : <div>LOADING</div>}
             </RequireAuth>
           }
         />

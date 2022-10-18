@@ -37,10 +37,18 @@ const mainReducer = createSlice({
     updateStore: (state, action) => {
       state = merge(state, action.payload);
     },
+    deleteSpecialty: (state) => {
+      state.specialities.pop();
+    },
   },
 });
 
-export const { addToStore, addToState, addSpecialty, updateStore } =
-  mainReducer.actions;
+export const {
+  addToStore,
+  addToState,
+  addSpecialty,
+  updateStore,
+  deleteSpecialty,
+} = mainReducer.actions;
 
 export default mainReducer.reducer;
