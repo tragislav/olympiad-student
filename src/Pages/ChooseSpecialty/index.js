@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToState, deleteSpecialty } from "../../store/main/reducer";
 import { getSpecialties } from "../../store/info/reducer";
 
+import { _transformEnrollee } from "../../helpers/transformResults";
+import { postEnrolleesData, putUserEnrollee } from "../../api/enrollee";
+
 import ProcessingData from "../../components/ProcessingData";
+import PageNavigation from "../../components/PageNavigation";
 import SpecialtyItem from "./SpecialtyItem";
 
 import "./styled.css";
-import { _transformEnrollee } from "../../helpers/transformResults";
-import { postEnrolleesData, putUserEnrollee } from "../../api/enrollee";
 
 function ChooseSpecialty() {
   const [secondSpec, setSecondSpec] = useState(false);
@@ -107,6 +109,7 @@ function ChooseSpecialty() {
         <form onSubmit={handleSubmit(onSubmit)} className="MainWrapperForm">
           <div className="EmptyDiv" />
           <div className="FormWrapper">
+            <PageNavigation pageNumber={3} />
             <div className="FormInner">
               <h2 className="FormInnerTitle">Выбор специальности</h2>
               <p className="FormInnerText">
