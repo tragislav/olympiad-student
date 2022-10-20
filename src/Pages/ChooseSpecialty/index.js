@@ -18,7 +18,6 @@ import "./styled.css";
 function ChooseSpecialty() {
   const [secondSpec, setSecondSpec] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [emptySpec, setEmptySpec] = useState(false);
 
   const specialties = useSelector((state) => state.info.specialties);
   const requestMethod = useSelector((state) => state.info.requestMethod);

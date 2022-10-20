@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
@@ -15,9 +14,6 @@ import {
 import ProcessingData from "../../components/ProcessingData";
 import PageNavigation from "../../components/PageNavigation";
 import MenuList from "../../components/MenuList";
-
-import { getEnrolleeByUsername } from "../../api/enrollee";
-import { _transformSpecialty } from "../../helpers/transformResults";
 
 import "./styled.css";
 
