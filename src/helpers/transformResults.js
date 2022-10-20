@@ -89,5 +89,6 @@ export const _transformEnrollee = (item) => {
     specialities: item.specialities.map(_transformSpecialty),
     user: item.user,
     id: item.id,
+    userSDOS: item.userSDOS,
   };
 };

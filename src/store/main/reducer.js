@@ -14,6 +14,7 @@ const initialState = {
   person: {},
   specialities: [],
   user: {},
+  userSDOS: [],
 };
 
 const mainReducer = createSlice({

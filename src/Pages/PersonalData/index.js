@@ -67,7 +67,7 @@ function PersonalData() {
 
   function indexOfSchool(arr, rrr) {
     if (Object.keys(educationalEstablishment)) {
-      return arr.findIndex((item) => item.id === rrr.value);
+      return arr.findIndex((item) => item.id === rrr.id);
     } else {
       return null;
     }
@@ -233,30 +233,6 @@ function PersonalData() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Учебное учреждение</p>
-                {/* <input
-                  {...register("educationalEstablishment.name")}
-                  className="InputContent w772"
-                  placeholder="Выберите учебное учреждение"
-                  defaultValue={
-                    educationalEstablishment.name
-                      ? educationalEstablishment.name
-                      : null
-                  }
-                  type="text"
-                  required
-                /> */}
-                {/* <Select
-                  className="SelectContent"
-                  placeholder={
-                    <div className="SelectPlaceholder">
-                      Выберите специальность
-                    </div>
-                  }
-                  options={establishments}
-                  onChange={(item) => console.log(item)}
-                  // defaultValue={specialties[defaultValue]}
-                  required
-                /> */}
                 <Select
                   className="EducationSelect"
                   placeholder={
