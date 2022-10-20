@@ -88,3 +88,7 @@
 .InputContent::-webkit-calendar-picker-indicator {
   padding-right: 20px;
 }
+
+.EducationSelect {
+  width: 772px;
+}

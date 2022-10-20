@@ -29,6 +29,9 @@ const mainReducer = createSlice({
       const { number, spec } = action.payload;
       state.specialities[number] = spec;
     },
+    addEstablishment: (state, action) => {
+      state.educationalEstablishment = action.payload;
+    },
     addToState: (state) => {
       localStorage.removeItem("info");
       localStorage.getItem("info");
@@ -47,6 +50,7 @@ export const {
   addToStore,
   addToState,
   addSpecialty,
+  addEstablishment,
   updateStore,
   deleteSpecialty,
 } = mainReducer.actions;

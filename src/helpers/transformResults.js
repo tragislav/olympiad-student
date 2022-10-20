@@ -10,6 +10,15 @@ export const _transformSpecialty = (item) => {
   };
 };
 
+export const _transformEducationEstablishments = (item) => {
+  return {
+    id: item.id,
+    name: item.name,
+    value: item.id,
+    label: item.name,
+  };
+};
+
 const _transformEducation = (item) => {
   return {
     name: item.name,
