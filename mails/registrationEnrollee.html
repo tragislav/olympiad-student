@@ -274,8 +274,9 @@
                               line-height: 18px;
                               color: #434c63;
                             "
+                            th:text="${dateReg}"
                           >
-                            28.09.2022, 11:33
+                            дата сейчас
                           </h2>
                         </td>
                       </tr>
@@ -325,7 +326,10 @@
                         color: #3f3f3f;
                       "
                     >
-                      Здраствуйте, Абазовский Константин Константинов
+                      Здраствуйте,
+                      <span style="margin: 0" th:text="${username}"
+                        >Абазовский Константин Константинов</span
+                      >
                     </h2>
                   </td>
                 </tr>
@@ -386,8 +390,10 @@
                               "
                               >Cпециальность №1:</b
                             >
-                            Автоматизация технологических процессов и
-                            производств
+                            <span style="margin: 0" th:text="${}"
+                              >Автоматизация технологических процессов и
+                              производств</span
+                            >
                           </p>
                         </td>
                       </tr>
@@ -412,7 +418,9 @@
                               "
                               >Код специльности:
                             </b>
-                            6-05-0713-04
+                            <span style="margin: 0" th:text="${}"
+                              >код специальности</span
+                            >
                           </p>
                         </td>
                       </tr>
@@ -437,7 +445,7 @@
                               "
                               >Учебный предмет:
                             </b>
-                            Математика
+                            <span style="margin: 0" th:text="${}">предмет</span>
                           </p>
                         </td>
                       </tr>
@@ -462,7 +470,7 @@
                               "
                               >Количество мест:
                             </b>
-                            10
+                            <span style="margin: 0" th:text="${}">10</span>
                           </p>
                         </td>
                       </tr>
@@ -503,7 +511,7 @@
                               "
                               >Ваш логин:</b
                             >
-                            dawdawdaw
+                            <span style="margin: 0" th:text="${}">логин</span>
                           </p>
                         </td>
                       </tr>
@@ -528,7 +536,7 @@
                               "
                               >Ваш пароль:</b
                             >
-                            dawdawdaw
+                            <span style="margin: 0" th:text="${}">пароль</span>
                           </p>
                         </td>
                       </tr>
@@ -559,6 +567,8 @@
                     >
                       Для прохождения олимпиады вам необходимо перейти в сервис
                       <a
+                        th:href="${}"
+                        th:text="${}"
                         href="#"
                         target="_blank"
                         style="
@@ -640,6 +650,7 @@
                     "
                   >
                     <a
+                      th:href="${link}"
                       href="#"
                       target="_blank"
                       style="
@@ -671,22 +682,6 @@
                 cellpadding="0"
                 role="presentation"
               >
-                <tr>
-                  <td style="padding: 0 0 25px 0">
-                    <p
-                      style="
-                        margin: 0;
-                        font-weight: 400;
-                        font-size: 16px;
-                        line-height: 24px;
-                        color: #505050;
-                      "
-                    >
-                      Если переход по кнопке не работает, скопируйте ее в
-                      адресную строку браузера: https://Ссылка
-                    </p>
-                  </td>
-                </tr>
                 <tr>
                   <td style="padding: 0 0 0 0">
                     <p
