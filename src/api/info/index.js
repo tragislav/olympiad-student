@@ -8,3 +8,12 @@ export function getAllSpecialties(username, password) {
     },
   });
 }
+
+export function getEducationEstablishments(username, password) {
+  return api.get("/api/educational_establishments", {
+    auth: {
+      username: username,
+      password: password,
+    },
+  });
+}

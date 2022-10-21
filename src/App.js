@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "./components/Layout";
 import Login from "./Pages/Login";
@@ -13,17 +13,21 @@ import RequireAuth from "./components/HOCs/RequireAuth";
 
 import { getEnrolleeByUsername } from "./api/enrollee";
 import { addToStore, addToState } from "./store/main/reducer";
-import { updateRequestMethod } from "./store/info/reducer";
+import { getEstablishments, updateRequestMethod } from "./store/info/reducer";
 import { _transformSpecialty } from "./helpers/transformResults";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
+  const loading = useSelector((state) => state.info.wait);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isLogin) {
+    dispatch(getEstablishments());
+    // console.log(loading);
+    if (isLogin && !loading) {
       getEnrolleeByUsername(
         sessionStorage.getItem("username"),
         sessionStorage.getItem("password")
@@ -48,12 +52,13 @@ function App() {
           setTimeout(() => setIsLoading(true), 1000);
         })
         .catch((e) => {
+          // console.log(loading);
           setIsLoading(true);
           dispatch(updateRequestMethod("POST"));
           console.error(e);
         });
     }
-  }, [dispatch, isLogin]);
+  }, [dispatch, isLogin, loading]);
 
   function loginStatus() {
     return setIsLogin(true);

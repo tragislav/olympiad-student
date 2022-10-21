@@ -7,8 +7,6 @@ import {
   setDataProcessing,
 } from "../../store/processing/reducer";
 
-import { addToStore } from "../../store/main/reducer";
-
 import "./styled.css";
 
 function ProcessingData({ notFirst, btnText, backTo }) {

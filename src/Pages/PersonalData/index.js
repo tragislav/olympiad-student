@@ -1,16 +1,19 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Select from "react-select";
 
-import { addToStore, addToState, updateStore } from "../../store/main/reducer";
+import {
+  addToStore,
+  addToState,
+  updateStore,
+  addEstablishment,
+} from "../../store/main/reducer";
 
 import ProcessingData from "../../components/ProcessingData";
 import PageNavigation from "../../components/PageNavigation";
-
-import { getEnrolleeByUsername } from "../../api/enrollee";
-import { _transformSpecialty } from "../../helpers/transformResults";
+import MenuList from "../../components/MenuList";
 
 import "./styled.css";
 
@@ -19,6 +22,9 @@ function PersonalData() {
   const person = useSelector((state) => state.main.person);
   const mainAddress = useSelector((state) => state.main.mainAddress);
   const address = useSelector((state) => state.main.mainAddress.address);
+  const establishments = useSelector(
+    (state) => state.info.educationalEstablishment
+  );
   const educationalEstablishment = useSelector(
     (state) => state.main.educationalEstablishment
   );
@@ -32,31 +38,6 @@ function PersonalData() {
   const { register, handleSubmit } = useForm({
     // resolver: yupResolver(schema),
   });
-  //   getEnrolleeByUsername(
-  //     sessionStorage.getItem("username"),
-  //     sessionStorage.getItem("password")
-  //   )
-  //     .then((data) => {
-  //       dispatch(
-  //         addToStore({
-  //           birthday: data.birthday,
-  //           educationalEstablishment: data.educationalEstablishment,
-  //           id: data.id,
-  //           legalRepresentative: data.legalRepresentative,
-  //           mainAddress: data.mainAddress,
-  //           passport: data.passport,
-  //           person: data.person,
-  //           specialities: data.specialities.map(_transformSpecialty),
-  //           user: data.user,
-  //           userSDOS: data.userSDOS,
-  //         })
-  //       );
-  //       dispatch(addToState());
-  //     })
-  //     .catch((e) => {
-  //       console.error(e);
-  //     });
-  // }, [dataLoading, dispatch]);
 
   const onSubmit = (inputs) => {
     console.log(inputs);
@@ -79,6 +60,14 @@ function PersonalData() {
         break;
     }
   };
+
+  function indexOfSchool(arr, rrr) {
+    if (Object.keys(educationalEstablishment)) {
+      return arr.findIndex((item) => item.id === rrr.id);
+    } else {
+      return null;
+    }
+  }
 
   return (
     <div className="MainWrapper">
@@ -240,17 +229,21 @@ function PersonalData() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Учебное учреждение</p>
-                <input
-                  {...register("educationalEstablishment.name")}
-                  className="InputContent w772"
-                  placeholder="Выберите учебное учреждение"
-                  defaultValue={
-                    educationalEstablishment.name
-                      ? educationalEstablishment.name
-                      : null
+                <Select
+                  className="EducationSelect"
+                  placeholder={
+                    <div className="SelectPlaceholder">
+                      Выберите учебное учреждение
+                    </div>
                   }
-                  type="text"
-                  required
+                  onChange={(item) => dispatch(addEstablishment(item))}
+                  components={{ MenuList }}
+                  defaultValue={
+                    establishments[
+                      indexOfSchool(establishments, educationalEstablishment)
+                    ]
+                  }
+                  options={establishments}
                 />
               </div>
             </div>

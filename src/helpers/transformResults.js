@@ -10,6 +10,15 @@ export const _transformSpecialty = (item) => {
   };
 };
 
+export const _transformEducationEstablishments = (item) => {
+  return {
+    id: item.id,
+    name: item.name,
+    value: item.id,
+    label: item.name,
+  };
+};
+
 const _transformEducation = (item) => {
   return {
     name: item.name,
@@ -80,5 +89,6 @@ export const _transformEnrollee = (item) => {
     specialities: item.specialities.map(_transformSpecialty),
     user: item.user,
     id: item.id,
+    userSDOS: item.userSDOS,
   };
 };

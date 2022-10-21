@@ -14,6 +14,7 @@ const initialState = {
   person: {},
   specialities: [],
   user: {},
+  userSDOS: [],
 };
 
 const mainReducer = createSlice({
@@ -28,6 +29,9 @@ const mainReducer = createSlice({
     addSpecialty: (state, action) => {
       const { number, spec } = action.payload;
       state.specialities[number] = spec;
+    },
+    addEstablishment: (state, action) => {
+      state.educationalEstablishment = action.payload;
     },
     addToState: (state) => {
       localStorage.removeItem("info");
@@ -47,6 +51,7 @@ export const {
   addToStore,
   addToState,
   addSpecialty,
+  addEstablishment,
   updateStore,
   deleteSpecialty,
 } = mainReducer.actions;
