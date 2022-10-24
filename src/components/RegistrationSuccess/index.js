@@ -3,7 +3,11 @@ import { ReactComponent as SuccessIcon } from "../../images/success-icon.svg";
 
 import "./styled.css";
 
-function RegistrationSuccess({ text, nav }) {
+function RegistrationSuccess({
+  text,
+  nav,
+  title = "Вы успешно зарегистрированы!",
+}) {
   const navigate = useNavigate();
 
   return (
@@ -11,7 +15,7 @@ function RegistrationSuccess({ text, nav }) {
       <div className="SuccessWrapper">
         <div className="SuccessTitle">
           <SuccessIcon />
-          <h3 className="SuccessTitleText">Вы успешно зарегистрированы!</h3>
+          <h3 className="SuccessTitleText">{title}</h3>
         </div>
         <div className="SuccessContent">
           <p className="SuccessContentText">{text}</p>

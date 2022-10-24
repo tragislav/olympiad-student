@@ -146,7 +146,7 @@ function Registration() {
               <p className="LoginFormError">Пароли не совпадают</p>
             </div>
             <button className="RegistrationFormSubmit" type="submit">
-              Зарегестрироваться
+              Зарегистрироваться
             </button>
           </form>
           <div className="RegistrationFooterForm">
