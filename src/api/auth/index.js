@@ -22,3 +22,11 @@ export function userRegistration(email, username, password) {
     ],
   });
 }
+
+export function sendMailToRecoveryPassword(email) {
+  return api.get(`/api/users/send-mail-reset-password?email=${email}`);
+}
+
+export function resetPassword(requestBody) {
+  return api.patch(`/api/users/reset-password`, requestBody);
+}
