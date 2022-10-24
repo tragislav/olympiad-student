@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import RegistrationSuccess from "../../components/RegistrationSuccess";
+import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
 import schema from "./validation";
 import "./styled.css";
 import { sendMailToRecoveryPassword } from "../../api/auth";
 
 function PasswordRecovery() {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
@@ -23,6 +25,7 @@ function PasswordRecovery() {
         setIsSuccess(true);
       })
       .catch((e) => {
+        setError(true);
         console.error(e);
       });
   };
@@ -39,18 +42,18 @@ function PasswordRecovery() {
     );
   } else {
     return (
-      <div className="RecoveryContainer">
-        <div className="RecoveryFormWrapper">
-          <h3 className="RecoveryFormTitle">Восстановление пароля</h3>
+      <div className="LoginContainer">
+        <div className="LoginFormWrapper">
+          <h3 className="LoginFormTitle">Восстановление пароля</h3>
           <p className="RecoveryText bold">
             Укажите ваш Адрес электронной почты
           </p>
           <p className="RecoveryText">
             Пожалуйста, укажите email, который вы использовали для входа
           </p>
-          <form className="RecoveryForm" onSubmit={handleSubmit(onSubmit)}>
+          <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
             <input
-              className="RecoveryFormInput"
+              className="LoginFormInput"
               ref={email.ref}
               name={email.name}
               onBlur={email.onBlur}
@@ -59,12 +62,16 @@ function PasswordRecovery() {
               placeholder="Введить вашу почту"
               required
             />
-            <button className="RecoveryFormSubmit" type="submit">
+            <div className={error ? "ErrorWrapper opacity1" : "ErrorWrapper"}>
+              <ErrorIcon />
+              <p className="LoginFormError">Некорректный email</p>
+            </div>
+            <button className="LoginFormSubmit" type="submit">
               Отправить
             </button>
           </form>
           <div className="RecoveryFooterForm">
-            <Link className="RecoveryFooterFormLink" to="/">
+            <Link className="LoginFooterFormLink" to="/">
               Назад
             </Link>
           </div>

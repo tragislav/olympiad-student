@@ -55,15 +55,13 @@ function Registration() {
     );
   } else {
     return (
-      <div className="RegistrationContainer">
-        <div className="RegistrationFormWrapper">
-          <h3 className="RegistrationFormTitle">Регистрация</h3>
-          <form className="RegistrationForm" onSubmit={handleSubmit(onSubmit)}>
+      <div className="LoginContainer">
+        <div className="LoginFormWrapper">
+          <h3 className="LoginFormTitle">Регистрация</h3>
+          <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
             <input
               className={
-                error.username
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                error.username ? "LoginFormInput errorInput" : "LoginFormInput"
               }
               ref={username.ref}
               name={username.name}
@@ -83,9 +81,7 @@ function Registration() {
             </div>
             <input
               className={
-                error.password
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                error.password ? "LoginFormInput errorInput" : "LoginFormInput"
               }
               ref={password.ref}
               name={password.name}
@@ -106,8 +102,8 @@ function Registration() {
             <input
               className={
                 error.againPassword
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                  ? "LoginFormInput errorInput"
+                  : "LoginFormInput"
               }
               ref={repeatPassword.ref}
               name={repeatPassword.name}
@@ -127,9 +123,7 @@ function Registration() {
             </div>
             <input
               className={
-                error.email
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                error.email ? "LoginFormInput errorInput" : "LoginFormInput"
               }
               ref={email.ref}
               name={email.name}
@@ -143,14 +137,14 @@ function Registration() {
               className={error.email ? "ErrorWrapper opacity1" : "ErrorWrapper"}
             >
               <ErrorIcon />
-              <p className="LoginFormError">Пароли не совпадают</p>
+              <p className="LoginFormError">Некорректный email</p>
             </div>
-            <button className="RegistrationFormSubmit" type="submit">
+            <button className="LoginFormSubmit" type="submit">
               Зарегистрироваться
             </button>
           </form>
           <div className="RegistrationFooterForm">
-            <Link className="RegistrationFooterFormLink" to="/">
+            <Link className="LoginFooterFormLink" to="/">
               Назад
             </Link>
           </div>
