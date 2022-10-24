@@ -51,6 +51,7 @@ function ChooseSpecialty() {
     dispatch(addToState());
     switch (requestMethod) {
       case "POST":
+        console.log(JSON.stringify(_transformEnrollee(userInfo)));
         postEnrolleesData(
           sessionStorage.getItem("username"),
           sessionStorage.getItem("password"),

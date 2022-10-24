@@ -9,6 +9,7 @@ import Registration from "./Pages/Registration";
 import PersonalData from "./Pages/PersonalData";
 import LegalRepresentative from "./Pages/LegalRepresentative";
 import ChooseSpecialty from "./Pages/ChooseSpecialty";
+import ChangePassword from "./Pages/ChangePassword";
 import RequireAuth from "./components/HOCs/RequireAuth";
 
 import { getEnrolleeByUsername } from "./api/enrollee";
@@ -94,6 +95,7 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="changePassword/uid=:uid" element={<ChangePassword />} />
       </Route>
     </Routes>
   );
