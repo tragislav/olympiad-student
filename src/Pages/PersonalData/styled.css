@@ -21,7 +21,8 @@
 
 .FormWrapper {
   width: 51%;
-  max-width: 832px;
+  width: 833px;
+  min-width: 833px;
 }
 
 .FormInner {
@@ -29,7 +30,7 @@
   border-radius: 15px;
   padding: 30px 30px 0 30px;
   background: #ffffff;
-  margin: 40px 0 0 auto;
+  margin: 40px 0 40px auto;
   max-width: 768px;
 }
 
@@ -90,5 +91,46 @@
 }
 
 .EducationSelect {
-  width: 772px;
+  width: 100%;
+}
+
+@media (max-width: 1370px) {
+  .MainWrapperForm {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 860px) {
+  .FormWrapper {
+    width: 678px;
+    min-width: 678px;
+  }
+}
+
+@media (max-width: 700px) {
+  .FormWrapper {
+    width: 100%;
+    min-width: 100%;
+    margin: 0 20px;
+  }
+  .InputWrapper {
+    margin: 0 30px 40px 30px;
+  }
+}
+
+@media (max-width: 672px) {
+  .InputWrapper {
+    width: 100%;
+  }
+  .FormInnerTitle {
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  }
+  .FormInnerText {
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+  }
 }

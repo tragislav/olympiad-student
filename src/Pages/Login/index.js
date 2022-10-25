@@ -4,12 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { authByUsername } from "../../api/auth";
-
 import { useAuth } from "../../hooks/useAuth";
 
-import schema from "./validation";
-
 import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
+
+import schema from "./validation";
 
 import "./styled.css";
 
@@ -67,14 +66,9 @@ function Login({ loginStatus }) {
     <div className="LoginContainer">
       <div className="LoginFormWrapper">
         <h3 className="LoginFormTitle">Вход в личный кабинет</h3>
-        {error ? (
-          <p className="LoginFormError">
-            Ошибка авторизации, попробуйте ещё раз
-          </p>
-        ) : null}
         <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
           <input
-            className="LoginFormInput"
+            className={error ? "LoginFormInput errorInput" : "LoginFormInput"}
             ref={username.ref}
             name={username.name}
             onBlur={username.onBlur}
@@ -83,8 +77,11 @@ function Login({ loginStatus }) {
             placeholder="Ваш Логин"
             required
           />
+          <div className={error ? "ErrorWrapper opacity1" : "ErrorWrapper"}>
+            <br />
+          </div>
           <input
-            className="LoginFormInput"
+            className={error ? "LoginFormInput errorInput" : "LoginFormInput"}
             ref={password.ref}
             name={password.name}
             onBlur={password.onBlur}
@@ -93,6 +90,12 @@ function Login({ loginStatus }) {
             placeholder="Ваш Пароль"
             required
           />
+          <div className={error ? "ErrorWrapper opacity1" : "ErrorWrapper"}>
+            <ErrorIcon />
+            <p className="LoginFormError">
+              Неверное имя пользователя или пароль
+            </p>
+          </div>
           <button className="LoginFormSubmit" type="submit" disabled={disable}>
             Войти
           </button>

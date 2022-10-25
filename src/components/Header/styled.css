@@ -11,5 +11,12 @@
   font-size: 22px;
   line-height: 27px;
   color: #ffffff;
-  margin: 30px 0;
+  margin: 30px 40px;
+}
+
+@media (max-width: 680px) {
+  .HeaderTitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }

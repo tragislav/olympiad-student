@@ -42,6 +42,13 @@
 }
 
 .SelectContent {
-  width: 542px;
+  width: 94%;
   margin-right: 30px;
+}
+
+@media (max-width: 672px) {
+  .SelectContent {
+    width: 100%;
+    margin-right: 0;
+  }
 }

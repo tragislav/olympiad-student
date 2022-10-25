@@ -57,3 +57,72 @@
 .w116 {
   width: 90px;
 }
+
+.w100proc {
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .w266 {
+    width: 165px;
+  }
+  .w274 {
+    width: 165px;
+  }
+  .w468 {
+    width: 289px;
+  }
+}
+
+@media (max-width: 700px) {
+  .mr30 {
+    margin-right: 0;
+  }
+
+  .mr25 {
+    margin-right: 0;
+  }
+  .w172 {
+    width: 94%;
+  }
+  .w266 {
+    width: 94%;
+  }
+  .w274 {
+    width: 94%;
+  }
+  .w468 {
+    width: 94%;
+  }
+  .w73 {
+    width: 94%;
+  }
+
+  .w772 {
+    width: 94%;
+  }
+
+  .w91 {
+    width: 94%;
+  }
+
+  .w155 {
+    width: 94%;
+  }
+
+  .w145 {
+    width: 94%;
+  }
+
+  .w546 {
+    width: 95%;
+  }
+
+  .w196 {
+    width: 94%;
+  }
+
+  .w116 {
+    width: 94%;
+  }
+}

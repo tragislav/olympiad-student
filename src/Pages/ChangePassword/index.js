@@ -11,10 +11,8 @@ import RegistrationSuccess from "../../components/RegistrationSuccess";
 function ChangePassword() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState({
-    username: false,
     password: false,
     againPassword: false,
-    email: false,
   });
   const { uid } = useParams();
 
@@ -32,12 +30,18 @@ function ChangePassword() {
           .then(() => {
             setIsSuccess(true);
           })
-          .then((e) => console.error(e));
+          .then((e) => {
+            console.error(e);
+            setError({ ...error, password: true });
+            setTimeout(() => {
+              setError({ ...error, password: true });
+            }, 3000);
+          });
         break;
       case false:
         setError({ ...error, againPassword: true });
         setTimeout(() => {
-          setError({ ...error, againPassword: false });
+          setError({ ...error, againPassword: true });
         }, 3000);
         break;
       default:
@@ -55,15 +59,13 @@ function ChangePassword() {
     );
   } else {
     return (
-      <div className="RegistrationContainer">
-        <div className="RegistrationFormWrapper">
-          <h3 className="RegistrationFormTitle">Смена пароля</h3>
-          <form className="RegistrationForm" onSubmit={handleSubmit(onSubmit)}>
+      <div className="LoginContainer">
+        <div className="LoginFormWrapper">
+          <h3 className="LoginFormTitle">Смена пароля</h3>
+          <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
             <input
               className={
-                error.password
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                error.password ? "LoginFormInput errorInput" : "LoginFormInput"
               }
               ref={password.ref}
               name={password.name}
@@ -84,8 +86,8 @@ function ChangePassword() {
             <input
               className={
                 error.againPassword
-                  ? "RegistrationFormInput errorInput"
-                  : "RegistrationFormInput"
+                  ? "LoginFormInput errorInput"
+                  : "LoginFormInput"
               }
               ref={repeatPassword.ref}
               name={repeatPassword.name}
@@ -103,7 +105,7 @@ function ChangePassword() {
               <ErrorIcon />
               <p className="LoginFormError">Пароли не совпадают</p>
             </div>
-            <button className="RegistrationFormSubmit" type="submit">
+            <button className="LoginFormSubmit" type="submit">
               Сменить пароль
             </button>
           </form>

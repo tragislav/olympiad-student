@@ -80,8 +80,8 @@ function PersonalData() {
               Ф.И.О / Дата рождения / Телефон / Email
             </h2>
             <p className="FormInnerText">
-              Заполните поля с отметкой * , чтобы перейти к дальнейшему шагу
-              вашей регистрации.
+              Заполните все поля, чтобы перейти к дальнейшему шагу вашей
+              регистрации.
             </p>
             <div className="FormInnerContent">
               <div className="InputWrapper">
@@ -227,7 +227,7 @@ function PersonalData() {
                   required
                 />
               </div>
-              <div className="InputWrapper">
+              <div className="InputWrapper w100proc">
                 <p className="InputTitle">Учебное учреждение</p>
                 <Select
                   className="EducationSelect"

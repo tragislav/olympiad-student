@@ -23,3 +23,9 @@
   font-weight: 500;
   background: #373e51;
 }
+
+@media (max-width: 360px) {
+  .SpecSubmit {
+    height: 65px;
+  }
+}
