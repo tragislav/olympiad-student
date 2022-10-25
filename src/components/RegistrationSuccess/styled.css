@@ -1,8 +1,10 @@
 .SuccessWrapper {
   text-align: center;
-  margin: 0 auto;
   position: relative;
-  max-width: 706px;
+  align-items: center;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .SuccessTitle {
@@ -36,10 +38,11 @@
 }
 
 .SuccessBtnWrapper {
+  width: 100%;
 }
 
 .SuccessBtn {
-  width: 420px;
+  width: 40%;
   height: 60px;
   background: #434c63;
   box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
@@ -51,4 +54,22 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+}
+
+@media (max-width: 562px) {
+  .SuccessBtn {
+    width: 94%;
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 416px) {
+  .SuccessTitleText {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .SuccessContentText {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
