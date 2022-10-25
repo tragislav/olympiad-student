@@ -40,7 +40,6 @@ function PersonalData() {
   });
 
   const onSubmit = (inputs) => {
-    console.log(inputs);
     const user = JSON.parse(sessionStorage.getItem("user"));
     switch (requestMethod) {
       case "POST":

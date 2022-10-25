@@ -14,7 +14,6 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
   useEffect(() => {
     if (defaultValue && Object.keys(componentSpecialties).length === 0) {
       setComponentSpecialties(specialties[defaultValue]);
-      console.log(specialties[defaultValue]);
     }
   }, [componentSpecialties, defaultValue, specialties]);
 

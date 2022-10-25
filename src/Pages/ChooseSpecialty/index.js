@@ -51,7 +51,6 @@ function ChooseSpecialty() {
     dispatch(addToState());
     switch (requestMethod) {
       case "POST":
-        console.log(JSON.stringify(_transformEnrollee(userInfo)));
         postEnrolleesData(
           sessionStorage.getItem("username"),
           sessionStorage.getItem("password"),
@@ -64,7 +63,6 @@ function ChooseSpecialty() {
           });
         break;
       case "PUT":
-        console.log(JSON.stringify(_transformEnrollee(userInfo)));
         putUserEnrollee(
           sessionStorage.getItem("username"),
           sessionStorage.getItem("password"),
@@ -93,7 +91,6 @@ function ChooseSpecialty() {
 
   function indexOfSpec(arr, rrr, number) {
     if (userSpecialties[number]) {
-      console.log(userSpecialties);
       return arr.findIndex((item) => item.value === rrr[number].value);
     } else {
       return null;

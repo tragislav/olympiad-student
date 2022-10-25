@@ -9,6 +9,10 @@ import { ReactComponent as ErrorIcon } from "../../images/error-icon.svg";
 import RegistrationSuccess from "../../components/RegistrationSuccess";
 
 function ChangePassword() {
+  const [isVisible, setIsVisible] = useState({
+    password: false,
+    repeatPassword: false,
+  });
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState({
     password: false,
@@ -25,7 +29,6 @@ function ChangePassword() {
     const { password, repeatPassword } = inputs;
     switch (password === repeatPassword) {
       case true:
-        console.log(inputs);
         resetPassword({ token: uid, password })
           .then(() => {
             setIsSuccess(true);
@@ -71,9 +74,19 @@ function ChangePassword() {
               name={password.name}
               onBlur={password.onBlur}
               onChange={password.onChange}
-              type="password"
+              type={isVisible.password ? "text" : "password"}
               placeholder="Введите новый пароль"
               required
+            />
+            <i
+              class={
+                isVisible.password ? "far fa-eye fa-eye-slash" : "far fa-eye"
+              }
+              id="togglePassword"
+              onClick={() =>
+                setIsVisible({ ...isVisible, password: !isVisible.password })
+              }
+              style={{ marginLeft: "-35px", cursor: "pointer" }}
             />
             <div
               className={
@@ -93,9 +106,24 @@ function ChangePassword() {
               name={repeatPassword.name}
               onBlur={repeatPassword.onBlur}
               onChange={repeatPassword.onChange}
-              type="password"
+              type={isVisible.repeatPassword ? "text" : "password"}
               placeholder="Потвердите ваш пароль"
               required
+            />
+            <i
+              class={
+                isVisible.repeatPassword
+                  ? "far fa-eye fa-eye-slash"
+                  : "far fa-eye"
+              }
+              id="togglePassword"
+              onClick={() =>
+                setIsVisible({
+                  ...isVisible,
+                  repeatPassword: !isVisible.repeatPassword,
+                })
+              }
+              style={{ marginLeft: "-35px", cursor: "pointer" }}
             />
             <div
               className={
