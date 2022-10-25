@@ -46,8 +46,8 @@ function Registration() {
           console.error(e.response.data);
           let parse = catchError(e.response.data);
           console.log(parse);
-          setError({ ...error, [parse]: true });
-          setTimeout(() => setError({ ...error, [parse]: false }), 3000);
+          setError({ ...error, [parse.name]: parse.text });
+          setTimeout(() => setError({ ...error, [parse.name]: false }), 3000);
         });
     } else {
       setError({ ...error, againPassword: true });
@@ -69,6 +69,7 @@ function Registration() {
         <div className="LoginFormWrapper">
           <h3 className="LoginFormTitle">Регистрация</h3>
           <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
+            <p className="LoginText">Придумайте логин(от 4 до 7 символов)</p>
             <input
               className={
                 error.username ? "LoginFormInput errorInput" : "LoginFormInput"
@@ -89,8 +90,9 @@ function Registration() {
               }
             >
               <ErrorIcon />
-              <p className="LoginFormError">Имя пользователя занято</p>
+              <p className="LoginFormError">{error.username}</p>
             </div>
+            <p className="LoginText">Придумайте пароль(от 4 до 16 символов)</p>
             <input
               className={
                 error.password ? "LoginFormInput errorInput" : "LoginFormInput"
@@ -121,8 +123,9 @@ function Registration() {
               }
             >
               <ErrorIcon />
-              <p className="LoginFormError">Неверный пароль</p>
+              <p className="LoginFormError">{error.password}</p>
             </div>
+            <p className="LoginText">Повторите пароль</p>
             <input
               className={
                 error.againPassword
@@ -162,6 +165,7 @@ function Registration() {
               <ErrorIcon />
               <p className="LoginFormError">Пароли не совпадают</p>
             </div>
+            <p className="LoginText">Введите ваш адрес электронной почты</p>
             <input
               className={
                 error.email ? "LoginFormInput errorInput" : "LoginFormInput"
@@ -171,14 +175,14 @@ function Registration() {
               onBlur={email.onBlur}
               onChange={email.onChange}
               type="email"
-              placeholder="Введите адрес электронной почты"
+              placeholder="Ваш email"
               required
             />
             <div
               className={error.email ? "ErrorWrapper opacity1" : "ErrorWrapper"}
             >
               <ErrorIcon />
-              <p className="LoginFormError">Занятый email</p>
+              <p className="LoginFormError">{error.email}</p>
             </div>
             <button className="LoginFormSubmit" type="submit">
               Зарегистрироваться

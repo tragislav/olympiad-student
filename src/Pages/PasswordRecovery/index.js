@@ -47,7 +47,7 @@ function PasswordRecovery() {
             Укажите ваш Адрес электронной почты
           </p>
           <p className="RecoveryText">
-            Пожалуйста, укажите email, который вы использовали для входа
+            Пожалуйста, укажите email, который вы использовали при регистрации
           </p>
           <form className="LoginForm" onSubmit={handleSubmit(onSubmit)}>
             <input

@@ -1,11 +1,13 @@
 export function catchError(errorText) {
   switch (errorText) {
     case "Пользователь с таким логином уже существует.":
-      return "username";
+      return { name: "username", text: "Имя пользователя занято" };
     case "Пользователь с таким email уже существует.":
-      return "email";
-    case "HTTP Status 401 - Index: 0, Size: 0\r\n":
-      return "activate";
+      return { name: "email", text: "Введённый email занят" };
+    case "Логин должен состоять только из латинских букв.":
+      return { name: "username", text: "Только латинские буквы" };
+    case "Пароль должен состоять только из латинских букв.":
+      return { name: "password", text: "Только латинские буквы" };
     default:
       return;
   }
