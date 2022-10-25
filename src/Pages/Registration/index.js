@@ -11,8 +11,13 @@ import RegistrationSuccess from "../../components/RegistrationSuccess";
 import schema from "./validation";
 
 import "./styled.css";
+import { catchError } from "../../helpers/catchError";
 
 function Registration() {
+  const [isVisible, setIsVisible] = useState({
+    password: false,
+    repeatPassword: false,
+  });
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState({
     username: false,
@@ -32,16 +37,22 @@ function Registration() {
 
   const onSubmit = (inputs) => {
     const { username, password, repeatPassword, email } = inputs;
-    password === repeatPassword
-      ? userRegistration(email, username, password)
-          .then(() => {
-            setIsSuccess(true);
-          })
-          .catch((e) => {
-            console.error(e);
-            alert("Регистрация не прошла");
-          })
-      : setError({ ...error, againPassword: true });
+    if (password === repeatPassword) {
+      userRegistration(email, username, password)
+        .then(() => {
+          setIsSuccess(true);
+        })
+        .catch((e) => {
+          console.error(e.response.data);
+          let parse = catchError(e.response.data);
+          console.log(parse);
+          setError({ ...error, [parse]: true });
+          setTimeout(() => setError({ ...error, [parse]: false }), 3000);
+        });
+    } else {
+      setError({ ...error, againPassword: true });
+      setTimeout(() => setError({ ...error, againPassword: false }), 3000);
+    }
   };
 
   if (isSuccess) {
@@ -68,6 +79,8 @@ function Registration() {
               onChange={username.onChange}
               type="text"
               placeholder="Введите логин"
+              minLength={4}
+              maxLength={7}
               required
             />
             <div
@@ -76,7 +89,7 @@ function Registration() {
               }
             >
               <ErrorIcon />
-              <p className="LoginFormError">Неверное имя пользователя</p>
+              <p className="LoginFormError">Имя пользователя занято</p>
             </div>
             <input
               className={
@@ -86,9 +99,21 @@ function Registration() {
               name={password.name}
               onBlur={password.onBlur}
               onChange={password.onChange}
-              type="password"
+              type={isVisible.password ? "text" : "password"}
               placeholder="Введите пароль"
+              minLength={4}
+              maxLength={16}
               required
+            />
+            <i
+              class={
+                isVisible.password ? "far fa-eye fa-eye-slash" : "far fa-eye"
+              }
+              id="togglePassword"
+              onClick={() =>
+                setIsVisible({ ...isVisible, password: !isVisible.password })
+              }
+              style={{ marginLeft: "-35px", cursor: "pointer" }}
             />
             <div
               className={
@@ -108,9 +133,26 @@ function Registration() {
               name={repeatPassword.name}
               onBlur={repeatPassword.onBlur}
               onChange={repeatPassword.onChange}
-              type="password"
+              type={isVisible.repeatPassword ? "text" : "password"}
               placeholder="Потвердите ваш пароль"
+              minLength={4}
+              maxLength={16}
               required
+            />
+            <i
+              class={
+                isVisible.repeatPassword
+                  ? "far fa-eye fa-eye-slash"
+                  : "far fa-eye"
+              }
+              id="togglePassword"
+              onClick={() =>
+                setIsVisible({
+                  ...isVisible,
+                  repeatPassword: !isVisible.repeatPassword,
+                })
+              }
+              style={{ marginLeft: "-35px", cursor: "pointer" }}
             />
             <div
               className={
@@ -136,7 +178,7 @@ function Registration() {
               className={error.email ? "ErrorWrapper opacity1" : "ErrorWrapper"}
             >
               <ErrorIcon />
-              <p className="LoginFormError">Некорректный email</p>
+              <p className="LoginFormError">Занятый email</p>
             </div>
             <button className="LoginFormSubmit" type="submit">
               Зарегистрироваться

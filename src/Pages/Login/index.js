@@ -13,6 +13,7 @@ import schema from "./validation";
 import "./styled.css";
 
 function Login({ loginStatus }) {
+  const [isVisible, setIsVisible] = useState(false);
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState(false);
 
@@ -75,6 +76,8 @@ function Login({ loginStatus }) {
             onChange={username.onChange}
             type="text"
             placeholder="Ваш Логин"
+            minLength={4}
+            maxLength={7}
             required
           />
           <div className={error ? "ErrorWrapper opacity1" : "ErrorWrapper"}>
@@ -86,9 +89,17 @@ function Login({ loginStatus }) {
             name={password.name}
             onBlur={password.onBlur}
             onChange={password.onChange}
-            type="password"
+            type={isVisible ? "text" : "password"}
             placeholder="Ваш Пароль"
+            minLength={4}
+            maxLength={16}
             required
+          />
+          <i
+            class={isVisible ? "far fa-eye fa-eye-slash" : "far fa-eye"}
+            id="togglePassword"
+            onClick={() => setIsVisible(!isVisible)}
+            style={{ marginLeft: "-35px", cursor: "pointer" }}
           />
           <div className={error ? "ErrorWrapper opacity1" : "ErrorWrapper"}>
             <ErrorIcon />
