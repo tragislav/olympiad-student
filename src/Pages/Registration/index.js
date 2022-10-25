@@ -35,7 +35,6 @@ function Registration() {
     password === repeatPassword
       ? userRegistration(email, username, password)
           .then(() => {
-            console.log("success");
             setIsSuccess(true);
           })
           .catch((e) => {

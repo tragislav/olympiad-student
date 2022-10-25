@@ -18,10 +18,8 @@ function PasswordRecovery() {
 
   const onSubmit = (inputs) => {
     const { email } = inputs;
-    console.log(email);
     sendMailToRecoveryPassword(email)
       .then(() => {
-        console.log("success");
         setIsSuccess(true);
       })
       .catch((e) => {

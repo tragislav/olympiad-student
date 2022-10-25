@@ -28,7 +28,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getEstablishments());
-    // console.log(loading);
     if (isLogin && !loading) {
       getEnrolleeByUsername(
         sessionStorage.getItem("username"),
@@ -54,7 +53,6 @@ function App() {
           setTimeout(() => setIsLoading(true), 1000);
         })
         .catch((e) => {
-          // console.log(loading);
           setIsLoading(true);
           dispatch(updateRequestMethod("POST"));
           console.error(e);

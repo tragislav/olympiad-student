@@ -52,7 +52,7 @@ function Login({ loginStatus }) {
         );
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
         setError(true);
         setDisable(false);
         setTimeout(() => setError(false), 5000);

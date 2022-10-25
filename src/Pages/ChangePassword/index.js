@@ -25,7 +25,6 @@ function ChangePassword() {
     const { password, repeatPassword } = inputs;
     switch (password === repeatPassword) {
       case true:
-        console.log(inputs);
         resetPassword({ token: uid, password })
           .then(() => {
             setIsSuccess(true);
