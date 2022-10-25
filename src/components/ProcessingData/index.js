@@ -36,6 +36,10 @@ function ProcessingData({ notFirst, btnText, backTo }) {
     }
   }, [dataProcessing, privacyPolicy]);
 
+  function _scrollToTop() {
+    window.scroll(0, 0);
+  }
+
   return (
     <div className="ProcessingWrapper">
       <div className="ProcessingInner">
@@ -72,12 +76,19 @@ function ProcessingData({ notFirst, btnText, backTo }) {
           </div>
           {notFirst ? (
             <div className="ButtonsContainer">
-              <button className="backBtn" onClick={() => navigate(backTo)}>
+              <button
+                className="backBtn"
+                onClick={() => {
+                  navigate(backTo);
+                  _scrollToTop();
+                }}
+              >
                 Назад
               </button>
               <button
                 className="ProcessingSubmit anotherBtnState"
                 type="submit"
+                onClick={() => _scrollToTop()}
                 disabled={disable}
               >
                 {btnText}
@@ -88,6 +99,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
               <button
                 className="ProcessingSubmit"
                 type="submit"
+                onClick={() => _scrollToTop()}
                 disabled={disable}
               >
                 {btnText}

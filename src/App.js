@@ -16,6 +16,7 @@ import { getEnrolleeByUsername } from "./api/enrollee";
 import { addToStore, addToState } from "./store/main/reducer";
 import { getEstablishments, updateRequestMethod } from "./store/info/reducer";
 import { _transformSpecialty } from "./helpers/transformResults";
+import Loader from "./components/Loader";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +76,7 @@ function App() {
           path="main"
           element={
             <RequireAuth>
-              {isLoading ? <PersonalData /> : <div>LOADING</div>}
+              {isLoading ? <PersonalData /> : <Loader />}
             </RequireAuth>
           }
         />
@@ -83,7 +84,7 @@ function App() {
           path="representative"
           element={
             <RequireAuth>
-              {isLoading ? <LegalRepresentative /> : <div>LOADING</div>}
+              {isLoading ? <LegalRepresentative /> : <Loader />}
             </RequireAuth>
           }
         />
@@ -91,7 +92,7 @@ function App() {
           path="specialty"
           element={
             <RequireAuth>
-              {isLoading ? <ChooseSpecialty /> : <div>LOADING</div>}
+              {isLoading ? <ChooseSpecialty /> : <Loader />}
             </RequireAuth>
           }
         />

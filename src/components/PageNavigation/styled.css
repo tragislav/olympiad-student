@@ -25,3 +25,31 @@
   border-radius: 7px;
   color: #ffffff;
 }
+
+@media (max-width: 860px) {
+  .NavWrapper {
+    font-size: 16px;
+  }
+  .NavItem {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .NavItem {
+    padding: 0 10px;
+  }
+}
+@media (max-width: 665px) {
+  .NavWrapper {
+    font-size: 18px;
+  }
+  .NavItem {
+    display: none;
+  }
+  .NavItemActive {
+    display: flex;
+    width: 100%;
+    text-align: center;
+  }
+}
