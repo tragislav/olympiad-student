@@ -3,7 +3,7 @@
   margin-left: 2.25%;
   border: 2px solid #f5f5f5;
   border-radius: 15px;
-  max-height: 513px;
+  max-height: 683px;
 }
 
 .ProcessingInner {
@@ -110,6 +110,6 @@
 @media (max-width: 400px) {
   .ProcessingWrapper {
     width: 100%;
-    max-height: 600px;
+    max-height: 770px;
   }
 }

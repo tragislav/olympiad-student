@@ -66,6 +66,9 @@ function LegalRepresentative() {
             <h2 className="FormInnerTitle">
               Личные данные законного представителя
             </h2>
+            <p className="FormInnerText">
+              Если вам есть 18 лет, введите свои данные повторно.
+            </p>
             <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>

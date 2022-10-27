@@ -90,8 +90,8 @@ function ChooseSpecialty() {
         )
           .then(() => alert("Данные добавлены!"))
           .catch((e) => {
-            console.error(e);
-            alert("Данные не добавлены!");
+            console.error(e.response.data);
+            alert(e.response.data);
           });
         break;
     }

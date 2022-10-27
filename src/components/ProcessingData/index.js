@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   setPrivacyPolicy,
@@ -47,8 +47,13 @@ function ProcessingData({ notFirst, btnText, backTo }) {
         <h2 className="ProcessingTitle">Обработка ваших данных</h2>
         <p className="ProcessingText">
           При создании учетной записи вы подтверждаете, что являетесь учащимся
-          11 класса и даете согласие с нашими правилами и условиями пользования
-          веб-сервисом
+          11 класса, ознакомлены с положением о проведении олимпиады, политикой
+          конфиденциальности, даете согласие на обработку персональных данных
+          участника и/или законного представителя.
+        </p>
+        <p className="ProcessingText">
+          По организационным вопросам обращаться по тел. (8-0212) 49-53-53 в
+          рабочие дни с 8.00 до 12.00 и с 13.00 до 17.00
         </p>
         <div className="ProcessingContent">
           <div className="ProcessingLabel">
@@ -61,7 +66,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 disabled={requestMethod === "PUT" ? true : false}
               />
               <a
-                href="https://vstu.by/"
+                href="https://vstu.by/postupayushchim/1617-abiturientam-2023-goda"
                 style={{ textDecoration: "none", color: "#000000" }}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -80,14 +85,14 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 onChange={() => dispatch(setPrivacyPolicy(!privacyPolicy))}
                 disabled={requestMethod === "PUT" ? true : false}
               />
-              <a
-                href="https://multisports.by/info/politika-konfidentsialnosti/"
+              <Link
+                to="/personalData"
                 style={{ textDecoration: "none", color: "#000000" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Политика конфиденциальности
-              </a>
+              </Link>
             </label>
           </div>
           <div className="ProcessingLabel">
@@ -111,7 +116,6 @@ function ProcessingData({ notFirst, btnText, backTo }) {
               </a>
             </label>
           </div>
-
           {notFirst ? (
             <div className="ButtonsContainer">
               <button

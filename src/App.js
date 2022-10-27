@@ -21,6 +21,7 @@ import {
 } from "./store/info/reducer";
 import { _transformSpecialty } from "./helpers/transformResults";
 import Loader from "./components/Loader";
+import PDF from "./Pages/PDF";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -111,6 +112,7 @@ function App() {
           }
         />
         <Route path="changePassword/uid=:uid" element={<ChangePassword />} />
+        <Route path="personalData" element={<PDF />} />
       </Route>
     </Routes>
   );
