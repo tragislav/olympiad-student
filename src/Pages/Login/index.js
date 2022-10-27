@@ -96,7 +96,7 @@ function Login({ loginStatus }) {
             required
           />
           <i
-            class={isVisible ? "far fa-eye fa-eye-slash" : "far fa-eye"}
+            className={isVisible ? "far fa-eye fa-eye-slash" : "far fa-eye"}
             id="togglePassword"
             onClick={() => setIsVisible(!isVisible)}
             style={{ marginLeft: "-35px", cursor: "pointer" }}

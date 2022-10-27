@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -62,73 +63,8 @@ function LegalRepresentative() {
         <div className="FormWrapper">
           <PageNavigation pageNumber={2} />
           <div className="FormInner">
-            {/* <div className="RepresentativeType">
-              <h3 className="FormInnerTitle">Выбрать:</h3>
-              <div className="RepresentativeTypeItem">
-                <input
-                  {...register(
-                    "legalRepresentative.person.representativeType",
-                    { required: true }
-                  )}
-                  defaultChecked={
-                    person.representativeType === "mother" ? true : false
-                  }
-                  className="RadioItem"
-                  type="radio"
-                  id="mother"
-                  value="mother"
-                  required
-                />
-                <label htmlFor="mother">Мать</label>
-              </div>
-              <div className="RepresentativeTypeItem">
-                <input
-                  {...register(
-                    "legalRepresentative.person.representativeType",
-                    { required: true }
-                  )}
-                  defaultChecked={
-                    person.representativeType === "father" ? true : false
-                  }
-                  className="RadioItem"
-                  type="radio"
-                  id="father"
-                  value="father"
-                  required
-                />
-                <label htmlFor="father">Отец</label>
-              </div>
-              <div className="RepresentativeTypeItem">
-                <input
-                  {...register(
-                    "legalRepresentative.person.representativeType",
-                    { required: true }
-                  )}
-                  default={
-                    person.representativeType === "guardian" ? true : false
-                  }
-                  className="RadioItem"
-                  type="radio"
-                  id="guardian"
-                  value="guardian"
-                  required
-                />
-                <label htmlFor="guardian">Опекун</label>
-              </div>
-            </div> */}
             <h2 className="FormInnerTitle">Личные данные представителя</h2>
             <div className="FormInnerContent">
-              <div className="InputWrapper">
-                <p className="InputTitle">Имя</p>
-                <input
-                  {...register("legalRepresentative.person.name")}
-                  className="InputContent mr30 w172"
-                  type="text"
-                  placeholder="Введите имя"
-                  defaultValue={person.name ? person.name : null}
-                  required
-                />
-              </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>
                 <input
@@ -140,6 +76,18 @@ function LegalRepresentative() {
                   required
                 />
               </div>
+              <div className="InputWrapper">
+                <p className="InputTitle">Имя</p>
+                <input
+                  {...register("legalRepresentative.person.name")}
+                  className="InputContent mr30 w172"
+                  type="text"
+                  placeholder="Введите имя"
+                  defaultValue={person.name ? person.name : null}
+                  required
+                />
+              </div>
+
               <div className="InputWrapper">
                 <p className="InputTitle">Отчество</p>
                 <input
@@ -153,20 +101,25 @@ function LegalRepresentative() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Телефон</p>
-                <input
+                <InputMask
                   {...register("legalRepresentative.person.phoneNumber")}
+                  mask="+375 (99) 999-99-99"
                   className="InputContent w266"
                   defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
                 />
               </div>
             </div>
-            <h2 className="FormInnerTitle">Паспортные данные представителя</h2>
+            <h2 className="FormInnerTitle">
+              Паспортные данные представителя (только латиница)
+            </h2>
             <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
-                <input
+                <InputMask
                   {...register("legalRepresentative.passport.series")}
+                  mask="aa"
+                  style={{ textTransform: "uppercase" }}
                   className="InputContent mr30 w91"
                   defaultValue={passport.series ? passport.series : null}
                   type="text"
@@ -175,11 +128,13 @@ function LegalRepresentative() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Номер</p>
-                <input
+                <InputMask
                   {...register("legalRepresentative.passport.number")}
+                  mask="9999999"
                   className="InputContent mr30 w145"
                   defaultValue={passport.number ? passport.number : null}
                   type="text"
+                  required
                 />
               </div>
               <div className="InputWrapper">
@@ -188,6 +143,9 @@ function LegalRepresentative() {
                   {...register(
                     "legalRepresentative.passport.identificationNumber"
                   )}
+                  minLength={14}
+                  maxLength={14}
+                  style={{ textTransform: "uppercase" }}
                   className="InputContent mr30 w274"
                   defaultValue={
                     passport.identificationNumber
@@ -195,6 +153,7 @@ function LegalRepresentative() {
                       : null
                   }
                   type="text"
+                  required
                 />
               </div>
             </div>

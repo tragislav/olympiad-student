@@ -14,7 +14,11 @@ import RequireAuth from "./components/HOCs/RequireAuth";
 
 import { getEnrolleeByUsername } from "./api/enrollee";
 import { addToStore, addToState } from "./store/main/reducer";
-import { getEstablishments, updateRequestMethod } from "./store/info/reducer";
+import {
+  getEstablishments,
+  getSpecialties,
+  updateRequestMethod,
+} from "./store/info/reducer";
 import { _transformSpecialty } from "./helpers/transformResults";
 import Loader from "./components/Loader";
 
@@ -49,12 +53,24 @@ function App() {
               userSDOS: data.userSDOS,
             })
           );
+          dispatch(
+            getSpecialties(
+              sessionStorage.getItem("username"),
+              sessionStorage.getItem("password")
+            )
+          );
           dispatch(addToState());
           setTimeout(() => setIsLoading(true), 1000);
         })
         .catch((e) => {
           setIsLoading(true);
           dispatch(updateRequestMethod("POST"));
+          dispatch(
+            getSpecialties(
+              sessionStorage.getItem("username"),
+              sessionStorage.getItem("password")
+            )
+          );
           console.error(e);
         });
     }

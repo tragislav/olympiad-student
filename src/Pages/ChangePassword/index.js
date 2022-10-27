@@ -79,7 +79,7 @@ function ChangePassword() {
               required
             />
             <i
-              class={
+              className={
                 isVisible.password ? "far fa-eye fa-eye-slash" : "far fa-eye"
               }
               id="togglePassword"
@@ -111,7 +111,7 @@ function ChangePassword() {
               required
             />
             <i
-              class={
+              className={
                 isVisible.repeatPassword
                   ? "far fa-eye fa-eye-slash"
                   : "far fa-eye"

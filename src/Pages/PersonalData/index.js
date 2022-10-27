@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
@@ -84,17 +85,6 @@ function PersonalData() {
             </p>
             <div className="FormInnerContent">
               <div className="InputWrapper">
-                <p className="InputTitle">Имя</p>
-                <input
-                  {...register("person.name")}
-                  className="InputContent mr30 w172"
-                  type="text"
-                  placeholder="Введите имя"
-                  defaultValue={person.name ? person.name : null}
-                  required
-                />
-              </div>
-              <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>
                 <input
                   {...register("person.surname")}
@@ -102,6 +92,17 @@ function PersonalData() {
                   type="text"
                   placeholder="Введите фамилию"
                   defaultValue={person.surname ? person.surname : null}
+                  required
+                />
+              </div>
+              <div className="InputWrapper">
+                <p className="InputTitle">Имя</p>
+                <input
+                  {...register("person.name")}
+                  className="InputContent mr30 w172"
+                  type="text"
+                  placeholder="Введите имя"
+                  defaultValue={person.name ? person.name : null}
                   required
                 />
               </div>
@@ -129,8 +130,9 @@ function PersonalData() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Телефон</p>
-                <input
+                <InputMask
                   {...register("person.phoneNumber")}
+                  mask="+375 (99) 999-99-99"
                   className="InputContent mr30 w266"
                   placeholder="Введите номер телефона"
                   defaultValue={person.phoneNumber ? person.phoneNumber : null}
@@ -186,7 +188,7 @@ function PersonalData() {
                 />
               </div>
               <div className="InputWrapper">
-                <p className="InputTitle">Улица (проспект, переулок)</p>
+                <p className="InputTitle">Улица (проспект, переулка)</p>
                 <input
                   {...register("mainAddress.street")}
                   className="InputContent mr30 w468"
@@ -227,12 +229,12 @@ function PersonalData() {
                 />
               </div>
               <div className="InputWrapper w100proc">
-                <p className="InputTitle">Учебное учреждение</p>
+                <p className="InputTitle">Учреждение образования</p>
                 <Select
                   className="EducationSelect"
                   placeholder={
                     <div className="SelectPlaceholder">
-                      Выберите учебное учреждение
+                      Выберите учреждение образования
                     </div>
                   }
                   onChange={(item) => dispatch(addEstablishment(item))}
@@ -248,12 +250,17 @@ function PersonalData() {
             </div>
           </div>
           <div className="FormInner">
-            <h2 className="FormInnerTitle">Паспортные данные</h2>
+            <h2 className="FormInnerTitle">
+              Паспортные данные (только латиница)
+            </h2>
             <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Серия</p>
-                <input
+                <InputMask
                   {...register("passport.series")}
+                  // beforeMaskedStateChange={beforeMaskedValueChange}
+                  mask="aa"
+                  style={{ textTransform: "uppercase" }}
                   className="InputContent mr25 w91"
                   defaultValue={passport.series ? passport.series : null}
                   type="text"
@@ -262,8 +269,9 @@ function PersonalData() {
               </div>
               <div className="InputWrapper">
                 <p className="InputTitle">Номер</p>
-                <input
+                <InputMask
                   {...register("passport.number")}
+                  mask="9999999"
                   className="InputContent mr25 w155"
                   defaultValue={passport.number ? passport.number : null}
                   type="text"
@@ -275,6 +283,9 @@ function PersonalData() {
                 <input
                   {...register("passport.identificationNumber")}
                   className="InputContent w274"
+                  minLength={14}
+                  maxLength={14}
+                  style={{ textTransform: "uppercase" }}
                   defaultValue={
                     passport.identificationNumber
                       ? passport.identificationNumber

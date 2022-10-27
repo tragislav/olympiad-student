@@ -29,13 +29,10 @@ function ChooseSpecialty() {
   const { handleSubmit } = useForm();
 
   useEffect(() => {
-    dispatch(
-      getSpecialties(
-        sessionStorage.getItem("username"),
-        sessionStorage.getItem("password")
-      )
-    );
-  }, [dispatch]);
+    return () => {
+      console.log("cleaned up");
+    };
+  }, []);
 
   useEffect(() => {
     userSpecialties.length === 2 ? setSecondSpec(true) : setSecondSpec(false);
@@ -89,13 +86,13 @@ function ChooseSpecialty() {
     }
   };
 
-  function indexOfSpec(arr, rrr, number) {
+  const indexOfSpec = (arr, obj, number) => {
     if (userSpecialties[number]) {
-      return arr.findIndex((item) => item.value === rrr[number].value);
+      return arr.findIndex((item) => item.value === obj.value);
     } else {
       return null;
     }
-  }
+  };
 
   function deleteSecondSpecialty() {
     setSecondSpec(false);
@@ -121,14 +118,14 @@ function ChooseSpecialty() {
               <div className="FormInner">
                 <h2 className="FormInnerTitle">Выбор специальности</h2>
                 <p className="FormInnerText">
-                  У вас есть возможность выбрать две специальности, для того что
-                  добавить вторую специальности необходимо заполнить первую
-                  специальность и нажать на кнопку «Добавить специальность»
+                  Вы можете выбрать не более двух специальностей для участия в
+                  предварительном этапе Олимпиады.
                 </p>
                 <SpecialtyItem
                   specialties={specialties}
                   number={0}
-                  defaultValue={indexOfSpec(specialties, userSpecialties, 0)}
+                  defaultValue={indexOfSpec(specialties, userSpecialties[0], 0)}
+                  disabled={requestMethod === "PUT" ? true : false}
                 />
                 {secondSpec ? (
                   <>
@@ -137,9 +134,10 @@ function ChooseSpecialty() {
                       number={1}
                       defaultValue={indexOfSpec(
                         specialties,
-                        userSpecialties,
+                        userSpecialties[1],
                         1
                       )}
+                      disabled={requestMethod === "PUT" ? true : false}
                     />
                     <div className="FormInnerContent">
                       <div className="InputWrapper">
@@ -147,6 +145,7 @@ function ChooseSpecialty() {
                           type="button"
                           className="SpecSubmit"
                           onClick={() => deleteSecondSpecialty()}
+                          disabled={requestMethod === "PUT" ? true : false}
                         >
                           Удалить вторую специальность
                         </button>

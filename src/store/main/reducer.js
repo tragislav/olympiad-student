@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import merge from "lodash/merge";
 
 const initialState = {
@@ -16,6 +16,13 @@ const initialState = {
   user: {},
   userSDOS: [],
 };
+
+export const addSpecialty = createAsyncThunk(
+  "main/addSpecialty",
+  async (payload) => {
+    return payload;
+  }
+);
 
 const mainReducer = createSlice({
   name: "main",
@@ -45,12 +52,17 @@ const mainReducer = createSlice({
       state.specialities.pop();
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(addSpecialty.fulfilled, (state, action) => {
+      const { number, spec } = action.payload;
+      state.specialities[number] = spec;
+    });
+  },
 });
 
 export const {
   addToStore,
   addToState,
-  addSpecialty,
   addEstablishment,
   updateStore,
   deleteSpecialty,

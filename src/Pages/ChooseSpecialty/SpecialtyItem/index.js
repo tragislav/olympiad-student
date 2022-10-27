@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
+import merge from "lodash/merge";
 
 import { addSpecialty } from "../../../store/main/reducer";
 
 import "./styled.css";
 
-function SpecialtyItem({ specialties, number, defaultValue }) {
+function SpecialtyItem({ specialties, number, defaultValue, disabled }) {
   const [componentSpecialties, setComponentSpecialties] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    return () => {
+      console.log("cleaned up");
+    };
+  }, []);
+
+  useEffect(() => {
     if (defaultValue && Object.keys(componentSpecialties).length === 0) {
-      setComponentSpecialties(specialties[defaultValue]);
+      setComponentSpecialties(() =>
+        merge(componentSpecialties, specialties[defaultValue])
+      );
     }
+    setLoading(true);
   }, [componentSpecialties, defaultValue, specialties]);
 
   function specialtyToStore(item, number) {
@@ -23,16 +34,17 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
     dispatch(
       addSpecialty({
         number,
-        spec: { id: value, name: label, code, subjectName, seatsNumber },
+        spec: { id: value, name: label, code, subjectName, seatsNumber, value },
       })
     );
   }
 
   return (
-    <div className="FormInnerContent">
-      <div className="InputWrapper">
-        <p className="InputTitle">Наименование специальности №{number + 1}</p>
-        {specialties & defaultValue ? (
+    loading && (
+      <div className="FormInnerContent">
+        <div className="InputWrapper w100proc">
+          <p className="InputTitle">Наименование специальности №{number + 1}</p>
+
           <Select
             className="SelectContent"
             placeholder={
@@ -41,59 +53,48 @@ function SpecialtyItem({ specialties, number, defaultValue }) {
             options={specialties}
             onChange={(item) => specialtyToStore(item, number)}
             defaultValue={specialties[defaultValue]}
-            required
+            isDisabled={disabled}
           />
-        ) : (
-          <Select
-            className="SelectContent"
-            placeholder={
-              <div className="SelectPlaceholder">Выберите специальность</div>
+        </div>
+        <div className="InputWrapper">
+          <p className="InputTitle">Код специальности</p>
+          <input
+            className="InputContent mr30 w196"
+            type="text"
+            defaultValue={
+              componentSpecialties.code ? componentSpecialties.code : null
             }
-            options={specialties}
-            onChange={(item) => specialtyToStore(item, number)}
-            defaultValue={specialties[defaultValue]}
-            required
+            disabled
           />
-        )}
+        </div>
+        <div className="InputWrapper">
+          <p className="InputTitle">Учебный предмет по олимпиаде</p>
+          <input
+            type="text"
+            className="InputContent w546"
+            defaultValue={
+              componentSpecialties.subjectName
+                ? componentSpecialties.subjectName
+                : null
+            }
+            disabled
+          />
+        </div>
+        {/* <div className="InputWrapper">
+          <p className="InputTitle">Кол-во мест</p>
+          <input
+            type="text"
+            className="InputContent w116"
+            defaultValue={
+              componentSpecialties.seatsNumber
+                ? componentSpecialties.seatsNumber
+                : null
+            }
+            disabled
+          />
+        </div> */}
       </div>
-      <div className="InputWrapper">
-        <p className="InputTitle">Код специальности</p>
-        <input
-          className="InputContent w196"
-          type="text"
-          defaultValue={
-            componentSpecialties.code ? componentSpecialties.code : null
-          }
-          disabled
-        />
-      </div>
-      <div className="InputWrapper">
-        <p className="InputTitle">Учебный предмет по олимпиаде</p>
-        <input
-          type="text"
-          className="InputContent mr30 w546"
-          defaultValue={
-            componentSpecialties.subjectName
-              ? componentSpecialties.subjectName
-              : null
-          }
-          disabled
-        />
-      </div>
-      <div className="InputWrapper">
-        <p className="InputTitle">Кол-во мест</p>
-        <input
-          type="text"
-          className="InputContent w116"
-          defaultValue={
-            componentSpecialties.seatsNumber
-              ? componentSpecialties.seatsNumber
-              : null
-          }
-          disabled
-        />
-      </div>
-    </div>
+    )
   );
 }
 

@@ -45,7 +45,6 @@ function Registration() {
         .catch((e) => {
           console.error(e.response.data);
           let parse = catchError(e.response.data);
-          console.log(parse);
           setError({ ...error, [parse.name]: parse.text });
           setTimeout(() => setError({ ...error, [parse.name]: false }), 3000);
         });
@@ -108,7 +107,7 @@ function Registration() {
               required
             />
             <i
-              class={
+              className={
                 isVisible.password ? "far fa-eye fa-eye-slash" : "far fa-eye"
               }
               id="togglePassword"
@@ -137,13 +136,13 @@ function Registration() {
               onBlur={repeatPassword.onBlur}
               onChange={repeatPassword.onChange}
               type={isVisible.repeatPassword ? "text" : "password"}
-              placeholder="Потвердите ваш пароль"
+              placeholder="Подтвердите ваш пароль"
               minLength={4}
               maxLength={16}
               required
             />
             <i
-              class={
+              className={
                 isVisible.repeatPassword
                   ? "far fa-eye fa-eye-slash"
                   : "far fa-eye"
