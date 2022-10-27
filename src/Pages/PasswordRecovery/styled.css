@@ -1,0 +1,28 @@
+.RecoveryText {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #505050;
+  padding: 10px 50px 0;
+}
+
+.bold {
+  font-weight: 500;
+  font-size: 18px;
+  color: #494a4a;
+  padding-top: 30px;
+}
+
+.RecoveryFooterForm {
+  padding: 0 50px 40px;
+}
+
+@media (max-width: 530px) {
+  .RecoveryText {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

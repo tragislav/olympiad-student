@@ -1,0 +1,46 @@
+.RepresentativeType {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #505050;
+}
+
+.RepresentativeTypeItem {
+  margin-left: 25px;
+  padding-top: 2px;
+}
+
+.RadioItem {
+  -webkit-appearance: none;
+  -webkit-box-shadow: none;
+  -moz-appearance: none;
+  appearance: none;
+  content: url("../../images/unselected-check-mark.svg");
+  padding: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-right: 5px;
+  background: #e6e6e6;
+  position: relative;
+  top: -2px;
+  margin-right: 10px;
+}
+
+.RadioItem:hover {
+  cursor: pointer;
+}
+
+.RadioItem:checked {
+  content: url("../../images/selected-check-mark.svg");
+  padding: 4px;
+  background: #434c63;
+}
+
+.RepresentativeAgree {
+  margin-bottom: 45px;
+}
