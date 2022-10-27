@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { useAuth } from "../../hooks/useAuth";
 
 import { addToState, deleteSpecialty } from "../../store/main/reducer";
 import { getSpecialties } from "../../store/info/reducer";
@@ -25,6 +28,8 @@ function ChooseSpecialty() {
   const userSpecialties = useSelector((state) => state.main.specialities);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const { handleSubmit } = useForm();
 
@@ -60,16 +65,22 @@ function ChooseSpecialty() {
           });
         break;
       case "PUT":
-        putUserEnrollee(
-          sessionStorage.getItem("username"),
-          sessionStorage.getItem("password"),
-          _transformEnrollee(userInfo)
-        )
-          .then(() => setIsSuccess(true))
-          .catch((e) => {
-            console.error(e);
-            alert("Данные не обновлены!");
-          });
+        // putUserEnrollee(
+        //   sessionStorage.getItem("username"),
+        //   sessionStorage.getItem("password"),
+        //   _transformEnrollee(userInfo)
+        // )
+        //   .then(() => setIsSuccess(true))
+        //   .catch((e) => {
+        //     console.error(e);
+        //     alert("Данные не обновлены!");
+        //   });
+        signOut(() => {
+          sessionStorage.removeItem("username");
+          sessionStorage.removeItem("password");
+          sessionStorage.removeItem("user");
+          navigate("/");
+        });
         break;
       default:
         postEnrolleesData(
@@ -103,8 +114,9 @@ function ChooseSpecialty() {
     return (
       <RegistrationSuccess
         text="Спасибо, вы зарегистрированы для участия в олимпиаде, письмо с инструкциями 
-отправлено вам на почту указанную при регистрации."
-        nav="/main"
+отправлено вам на почту, указанную при регистрации."
+        nav="/"
+        logout={true}
       />
     );
   } else {
@@ -159,6 +171,7 @@ function ChooseSpecialty() {
                         type="button"
                         className="SpecSubmit"
                         onClick={() => setSecondSpec(true)}
+                        disabled={requestMethod === "PUT" ? true : false}
                       >
                         Добавить специальность
                       </button>
@@ -169,7 +182,7 @@ function ChooseSpecialty() {
             </div>
             <ProcessingData
               notFirst={true}
-              btnText="Зарегистрироваться"
+              btnText={requestMethod === "PUT" ? "Выйти" : "Зарегистрироваться"}
               backTo="/representative"
             />
           </form>

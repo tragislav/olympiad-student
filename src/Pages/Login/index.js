@@ -29,7 +29,7 @@ function Login({ loginStatus }) {
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
       signIn(JSON.parse(sessionStorage.getItem("user")), () =>
-        navigate(location.state ? location.state?.from : `/main`, {
+        navigate(`/main`, {
           replace: true,
         })
       );

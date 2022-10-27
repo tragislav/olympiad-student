@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Select from "react-select";
 
 import {
   addToStore,
@@ -14,7 +13,6 @@ import {
 
 import ProcessingData from "../../components/ProcessingData";
 import PageNavigation from "../../components/PageNavigation";
-import MenuList from "../../components/MenuList";
 
 import "./styled.css";
 
@@ -23,9 +21,9 @@ function PersonalData() {
   const person = useSelector((state) => state.main.person);
   const mainAddress = useSelector((state) => state.main.mainAddress);
   const address = useSelector((state) => state.main.mainAddress.address);
-  const establishments = useSelector(
-    (state) => state.info.educationalEstablishment
-  );
+  // const establishments = useSelector(
+  //   (state) => state.info.educationalEstablishment
+  // );
   const educationalEstablishment = useSelector(
     (state) => state.main.educationalEstablishment
   );
@@ -49,8 +47,8 @@ function PersonalData() {
         navigate("/representative");
         break;
       case "PUT":
-        dispatch(updateStore({ ...inputs, user }));
-        dispatch(addToState());
+        // dispatch(updateStore({ ...inputs, user }));
+        // dispatch(addToState());
         navigate("/representative");
         break;
       default:
@@ -61,13 +59,13 @@ function PersonalData() {
     }
   };
 
-  function indexOfSchool(arr, rrr) {
-    if (Object.keys(educationalEstablishment)) {
-      return arr.findIndex((item) => item.id === rrr.id);
-    } else {
-      return null;
-    }
-  }
+  // function indexOfSchool(arr, rrr) {
+  //   if (Object.keys(educationalEstablishment)) {
+  //     return arr.findIndex((item) => item.id === rrr.id);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   return (
     <div className="MainWrapper">
@@ -92,6 +90,7 @@ function PersonalData() {
                   type="text"
                   placeholder="Введите фамилию"
                   defaultValue={person.surname ? person.surname : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -103,6 +102,7 @@ function PersonalData() {
                   type="text"
                   placeholder="Введите имя"
                   defaultValue={person.name ? person.name : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -114,6 +114,7 @@ function PersonalData() {
                   type="text"
                   placeholder="Введите отчество"
                   defaultValue={person.patronymic ? person.patronymic : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -125,6 +126,9 @@ function PersonalData() {
                   type="date"
                   placeholder="дд.мм.гггг"
                   defaultValue={userInfo.birthday ? userInfo.birthday : null}
+                  min="2000-01-01"
+                  max="2008-12-31"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -137,6 +141,7 @@ function PersonalData() {
                   placeholder="Введите номер телефона"
                   defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -162,6 +167,7 @@ function PersonalData() {
                   placeholder="Введите область"
                   defaultValue={address.region ? address.region : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -173,6 +179,7 @@ function PersonalData() {
                   placeholder="Введите район"
                   defaultValue={address.district ? address.district : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -184,6 +191,7 @@ function PersonalData() {
                   placeholder="Введите населённый пункт"
                   defaultValue={address.locality ? address.locality : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -195,6 +203,7 @@ function PersonalData() {
                   placeholder="Введите название улицы, проспекта, переулока"
                   defaultValue={mainAddress.street ? mainAddress.street : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -205,6 +214,7 @@ function PersonalData() {
                   className="InputContent mr25 w73"
                   defaultValue={mainAddress.house ? mainAddress.house : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -215,6 +225,7 @@ function PersonalData() {
                   className="InputContent mr25 w73"
                   defaultValue={mainAddress.frame ? mainAddress.frame : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -225,12 +236,13 @@ function PersonalData() {
                   className="InputContent w73"
                   defaultValue={mainAddress.flat ? mainAddress.flat : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
               <div className="InputWrapper w100proc">
                 <p className="InputTitle">Учреждение образования</p>
-                <Select
+                {/* <Select
                   className="EducationSelect"
                   placeholder={
                     <div className="SelectPlaceholder">
@@ -245,6 +257,18 @@ function PersonalData() {
                     ]
                   }
                   options={establishments}
+                /> */}
+                <input
+                  {...register("educationalEstablishment.name")}
+                  className="InputContent w468"
+                  defaultValue={
+                    educationalEstablishment.name
+                      ? educationalEstablishment.name
+                      : null
+                  }
+                  type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
+                  required
                 />
               </div>
             </div>
@@ -264,6 +288,7 @@ function PersonalData() {
                   className="InputContent mr25 w91"
                   defaultValue={passport.series ? passport.series : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -275,6 +300,7 @@ function PersonalData() {
                   className="InputContent mr25 w155"
                   defaultValue={passport.number ? passport.number : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -292,6 +318,7 @@ function PersonalData() {
                       : null
                   }
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>

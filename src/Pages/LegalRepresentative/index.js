@@ -19,9 +19,9 @@ function LegalRepresentative() {
     (state) => state.main.legalRepresentative.passport
   );
   const person = useSelector((state) => state.main.legalRepresentative.person);
-  const legalRepresentative = useSelector(
-    (state) => state.main.legalRepresentative
-  );
+  // const legalRepresentative = useSelector(
+  //   (state) => state.main.legalRepresentative
+  // );
   const requestMethod = useSelector((state) => state.info.requestMethod);
 
   const navigate = useNavigate();
@@ -44,8 +44,8 @@ function LegalRepresentative() {
         navigate("/specialty");
         break;
       case "PUT":
-        dispatch(updateStore(inputs));
-        dispatch(addToState());
+        // dispatch(updateStore(inputs));
+        // dispatch(addToState());
         navigate("/specialty");
         break;
       default:
@@ -63,7 +63,9 @@ function LegalRepresentative() {
         <div className="FormWrapper">
           <PageNavigation pageNumber={2} />
           <div className="FormInner">
-            <h2 className="FormInnerTitle">Личные данные представителя</h2>
+            <h2 className="FormInnerTitle">
+              Личные данные законного представителя
+            </h2>
             <div className="FormInnerContent">
               <div className="InputWrapper">
                 <p className="InputTitle">Фамилия</p>
@@ -73,6 +75,7 @@ function LegalRepresentative() {
                   type="text"
                   placeholder="Введите фамилию"
                   defaultValue={person.surname ? person.surname : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -84,6 +87,7 @@ function LegalRepresentative() {
                   type="text"
                   placeholder="Введите имя"
                   defaultValue={person.name ? person.name : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -96,6 +100,7 @@ function LegalRepresentative() {
                   type="text"
                   placeholder="Введите отчество"
                   defaultValue={person.patronymic ? person.patronymic : null}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -107,11 +112,13 @@ function LegalRepresentative() {
                   className="InputContent w266"
                   defaultValue={person.phoneNumber ? person.phoneNumber : null}
                   type="tel"
+                  disabled={requestMethod === "PUT" ? true : false}
+                  required
                 />
               </div>
             </div>
             <h2 className="FormInnerTitle">
-              Паспортные данные представителя (только латиница)
+              Паспортные данные законного представителя (только латиница)
             </h2>
             <div className="FormInnerContent">
               <div className="InputWrapper">
@@ -123,6 +130,7 @@ function LegalRepresentative() {
                   className="InputContent mr30 w91"
                   defaultValue={passport.series ? passport.series : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -134,6 +142,7 @@ function LegalRepresentative() {
                   className="InputContent mr30 w145"
                   defaultValue={passport.number ? passport.number : null}
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -153,6 +162,7 @@ function LegalRepresentative() {
                       : null
                   }
                   type="text"
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
               </div>
@@ -167,6 +177,7 @@ function LegalRepresentative() {
                   value="a"
                   defaultChecked={person.agreed ? true : false}
                   onChange={() => setAgreed(!agreed)}
+                  disabled={requestMethod === "PUT" ? true : false}
                   required
                 />
                 Я потверждаю, что являюсь законным представителем

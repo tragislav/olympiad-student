@@ -17,6 +17,7 @@ function ProcessingData({ notFirst, btnText, backTo }) {
     (state) => state.processing.dataProcessing
   );
   const privacyPolicy = useSelector((state) => state.processing.privacyPolicy);
+  const requestMethod = useSelector((state) => state.info.requestMethod);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,10 +46,30 @@ function ProcessingData({ notFirst, btnText, backTo }) {
       <div className="ProcessingInner">
         <h2 className="ProcessingTitle">Обработка ваших данных</h2>
         <p className="ProcessingText">
-          При создании учетной записи вы даете согласие с нашими правилами и
-          условиями пользования веб-сервисом
+          При создании учетной записи вы подтверждаете, что являетесь учащимся
+          11 класса и даете согласие с нашими правилами и условиями пользования
+          веб-сервисом
         </p>
         <div className="ProcessingContent">
+          <div className="ProcessingLabel">
+            <label htmlFor="dataProcessing">
+              <input
+                className="RadioItem"
+                type="checkbox"
+                defaultChecked={requestMethod === "PUT" ? true : false}
+                name="dataProcessing"
+                disabled={requestMethod === "PUT" ? true : false}
+              />
+              <a
+                href="https://vstu.by/"
+                style={{ textDecoration: "none", color: "#000000" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Положение об Олимпиаде
+              </a>
+            </label>
+          </div>
           <div className="ProcessingLabel">
             <label htmlFor="privacyPolicy">
               <input
@@ -57,8 +78,16 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 name="privacyPolicy"
                 checked={privacyPolicy}
                 onChange={() => dispatch(setPrivacyPolicy(!privacyPolicy))}
+                disabled={requestMethod === "PUT" ? true : false}
               />
-              Политика конфиденциальности
+              <a
+                href="https://multisports.by/info/politika-konfidentsialnosti/"
+                style={{ textDecoration: "none", color: "#000000" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Политика конфиденциальности
+              </a>
             </label>
           </div>
           <div className="ProcessingLabel">
@@ -69,11 +98,20 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 checked={dataProcessing}
                 name="dataProcessing"
                 onChange={() => dispatch(setDataProcessing(!dataProcessing))}
+                disabled={requestMethod === "PUT" ? true : false}
               />
-              Обработка данных в соответствии с законом о персональных данных от
-              7 мая 2021 г. № 99-3.
+              <a
+                href="https://pravo.by/upload/docs/op/H12100099_1620939600.pdf"
+                style={{ textDecoration: "none", color: "#000000" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Обработка данных в соответствии с законом о персональных данных
+                от 7 мая 2021 г. № 99-3.
+              </a>
             </label>
           </div>
+
           {notFirst ? (
             <div className="ButtonsContainer">
               <button
