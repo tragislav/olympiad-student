@@ -11,6 +11,7 @@ import "./styled.css";
 
 function ProcessingData({ notFirst, btnText, backTo }) {
   const [disable, setDisable] = useState(true);
+  const [olympic, setOlympic] = useState(false);
 
   const person = useSelector((state) => state.main.person);
   const dataProcessing = useSelector(
@@ -63,10 +64,11 @@ function ProcessingData({ notFirst, btnText, backTo }) {
                 type="checkbox"
                 defaultChecked={requestMethod === "PUT" ? true : false}
                 name="dataProcessing"
+                onChange={() => setOlympic(!olympic)}
                 disabled={requestMethod === "PUT" ? true : false}
               />
               <a
-                href="https://vstu.by/postupayushchim/1617-abiturientam-2023-goda"
+                href="https://abiturient.vstu.by/wp-content/uploads/2023/vstu_olimp.pdf"
                 style={{ textDecoration: "none", color: "#000000" }}
                 target="_blank"
                 rel="noopener noreferrer"

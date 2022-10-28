@@ -20,17 +20,25 @@ function SpecialtyItem({ specialties, number, defaultValue, disabled }) {
   }, []);
 
   useEffect(() => {
-    if (defaultValue && Object.keys(componentSpecialties).length === 0) {
-      setComponentSpecialties(() =>
-        merge(componentSpecialties, specialties[defaultValue])
-      );
-    }
+    // if (defaultValue && Object.keys(componentSpecialties).length === 0) {
+    //   console.log(specialties[defaultValue], number, "useEffect");
+    //   setComponentSpecialties(() =>
+    //     merge(componentSpecialties, specialties[defaultValue])
+    //   );
+    // }
+    setComponentSpecialties(() =>
+      merge(componentSpecialties, specialties[defaultValue])
+    );
     setLoading(true);
-  }, [componentSpecialties, defaultValue, specialties]);
+  }, [componentSpecialties, defaultValue, number, specialties]);
 
   function specialtyToStore(item, number) {
     const { label, value, code, subjectName, seatsNumber } = item;
     setComponentSpecialties(item);
+    console.log(
+      { id: value, name: label, code, subjectName, seatsNumber, value },
+      "specialtyToStore"
+    );
     dispatch(
       addSpecialty({
         number,
@@ -44,7 +52,6 @@ function SpecialtyItem({ specialties, number, defaultValue, disabled }) {
       <div className="FormInnerContent">
         <div className="InputWrapper w100proc">
           <p className="InputTitle">Наименование специальности №{number + 1}</p>
-
           <Select
             className="SelectContent"
             placeholder={

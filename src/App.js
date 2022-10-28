@@ -32,8 +32,8 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getEstablishments());
-    if (isLogin && !loading) {
+    // dispatch(getEstablishments());
+    if (isLogin) {
       getEnrolleeByUsername(
         sessionStorage.getItem("username"),
         sessionStorage.getItem("password")

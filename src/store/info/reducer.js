@@ -46,10 +46,11 @@ const infoReducer = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getSpecialties.fulfilled, (state, action) => {
       state.specialties = action.payload;
+      state.wait = false;
     });
     builder.addCase(getEstablishments.fulfilled, (state, action) => {
       state.educationalEstablishment = action.payload;
-      state.wait = false;
+      // state.wait = false;
     });
   },
 });
