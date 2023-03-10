@@ -1,0 +1,59 @@
+.css-qc6sy-singleValue {
+  font-size: 16px;
+  /* padding: 18px 0 18px 0px;
+  height: 55px; */
+  color: hsl(0, 0%, 20%);
+  grid-area: 1/1/2/3;
+  margin-left: 2px;
+  margin-right: 2px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+  line-height: 19px;
+}
+.css-1pahdxg-control {
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #ebebeb;
+  border-radius: 7px;
+  box-shadow: none !important;
+  height: 61px;
+}
+
+.css-1insrsq-control {
+  height: 61px;
+}
+
+.css-1pahdxg-control:hover {
+  border-color: #ebebeb !important;
+  box-shadow: none !important;
+}
+.css-1s2u09g-control {
+  background: #ffffff;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+  box-shadow: none !important;
+  height: 61px;
+}
+
+.css-qc6sy-singleValue {
+  padding-left: 10px;
+}
+
+.SelectPlaceholder {
+  padding-left: 10px;
+}
+
+.SelectContent {
+  width: 100%;
+  margin-right: 30px;
+}
+
+@media (max-width: 672px) {
+  .SelectContent {
+    width: 100%;
+    margin-right: 0;
+  }
+}

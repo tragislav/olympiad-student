@@ -1,0 +1,75 @@
+.SuccessWrapper {
+  text-align: center;
+  position: relative;
+  align-items: center;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.SuccessTitle {
+  font-family: "Roboto";
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.SuccessTitleText {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 24px;
+  color: #494a4a;
+  margin-left: 15px;
+}
+
+.SuccessContent {
+  border-bottom: 2px solid #f5f5f5;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.SuccessContentText {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #505050;
+}
+
+.SuccessBtnWrapper {
+  width: 100%;
+}
+
+.SuccessBtn {
+  width: 40%;
+  height: 60px;
+  background: #434c63;
+  box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
+  border-radius: 7px;
+  border: inherit;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+@media (max-width: 562px) {
+  .SuccessBtn {
+    width: 94%;
+    margin: 0 20px;
+  }
+}
+
+@media (max-width: 416px) {
+  .SuccessTitleText {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .SuccessContentText {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

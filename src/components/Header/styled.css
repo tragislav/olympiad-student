@@ -1,0 +1,22 @@
+.HeaderWrapper {
+  background: #434c63;
+  display: flex;
+  justify-content: center;
+}
+
+.HeaderTitle {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+  color: #ffffff;
+  margin: 30px 40px;
+}
+
+@media (max-width: 680px) {
+  .HeaderTitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

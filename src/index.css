@@ -164,3 +164,31 @@ input,
 select {
   vertical-align: middle;
 }
+
+input {
+  -webkit-box-shadow: inset 0 0 0 50px #fff;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #505050;
+  background: #ffffff;
+  transition: 0.2s all linear;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+}
+
+input::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9a9a9a;
+}
+
+input:disabled {
+  background: #ededed;
+  -webkit-box-shadow: none;
+}

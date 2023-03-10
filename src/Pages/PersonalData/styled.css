@@ -1,0 +1,136 @@
+.MainWrapper {
+  font-family: "Roboto";
+  font-style: normal;
+  width: 89.2%;
+  padding: 0 5.4%;
+  margin-top: 60px;
+}
+
+.MainWrapperForm {
+  display: flex;
+  /* justify-content: space-between; */
+  /* justify-content: space-evenly; */
+  width: 100%;
+}
+
+.EmptyDiv {
+  width: 23%;
+  max-width: 395px;
+  margin-right: 2.25%;
+}
+
+.FormWrapper {
+  width: 51%;
+  width: 833px;
+  min-width: 833px;
+}
+
+.FormInner {
+  border: 2px solid #f5f5f5;
+  border-radius: 15px;
+  padding: 30px 30px 0 30px;
+  background: #ffffff;
+  margin: 40px 0 40px auto;
+  max-width: 768px;
+}
+
+.FormInnerTitle {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #494a4a;
+  margin-bottom: 20px;
+}
+
+.FormInnerText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #505050;
+  margin-bottom: 25px;
+}
+
+.FormInnerContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-top: 2px solid #f5f5f5;
+  padding-top: 30px;
+}
+
+.InputWrapper {
+  margin-bottom: 40px;
+}
+
+.InputTitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
+  margin-bottom: 13px;
+  padding-left: 20px;
+}
+
+.InputContent {
+  height: 55px;
+  padding-left: 20px;
+}
+
+.InputContent::-webkit-datetime-edit-text,
+.InputContent::-webkit-datetime-edit-month-field,
+.InputContent::-webkit-datetime-edit-day-field,
+.InputContent::-webkit-datetime-edit-year-field {
+  /* font-weight: 400; */
+  /* font-size: 25px; */
+  /* line-height: 19px; */
+  color: #9a9a9a;
+}
+
+.InputContent::-webkit-calendar-picker-indicator {
+  padding-right: 20px;
+}
+
+.EducationSelect {
+  width: 100%;
+}
+
+@media (max-width: 1370px) {
+  .MainWrapperForm {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 860px) {
+  .FormWrapper {
+    width: 678px;
+    min-width: 678px;
+  }
+}
+
+@media (max-width: 700px) {
+  .FormWrapper {
+    width: 100%;
+    min-width: 100%;
+    margin: 0 20px;
+  }
+  .InputWrapper {
+    margin: 0 30px 40px 30px;
+  }
+}
+
+@media (max-width: 672px) {
+  .InputWrapper {
+    width: 100%;
+  }
+  .FormInnerTitle {
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  }
+  .FormInnerText {
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+  }
+}
